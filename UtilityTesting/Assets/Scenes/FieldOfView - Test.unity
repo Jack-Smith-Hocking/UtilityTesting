@@ -1015,36 +1015,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 286365784}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1263815626
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1263815627}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1263815627
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263815626}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2233.2375, y: 1054.7737, z: -26.17418}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1819965718}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1287814176 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 393579087878996520, guid: 3fbd2bf3e7d665848adad94987bf24a7,
@@ -1624,129 +1594,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787908488}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1819965715
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1819965718}
-  - component: {fileID: 1819965717}
-  - component: {fileID: 1819965716}
-  m_Layer: 0
-  m_Name: UtilityTester (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1819965716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819965715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34746dc4def92b94ba72fd5e8f11c64d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  m_mappedKeys:
-  - m_modifierKeyCode: 304
-    m_primaryKeyCode: 113
-    m_event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1445508659}
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    m_description: 
-  - m_modifierKeyCode: 306
-    m_primaryKeyCode: 113
-    m_event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1445508659}
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-    m_description: 
-  - m_modifierKeyCode: 0
-    m_primaryKeyCode: 9
-    m_event:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 700163469}
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    m_description: 
---- !u!114 &1819965717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819965715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b223595fdf6a4df4ab783e2484b56dbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_iterationCount: 0
-  m_getClosestListSize: 0
-  m_testGetClosest: 0
-  m_monoInvokerToggleObject: {fileID: 1263815626}
-  m_testMonoInvoker: 1
---- !u!4 &1819965718
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819965715}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2188.6465, y: -1047.5654, z: 255.20215}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1263815627}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1840345275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,6 +1605,7 @@ GameObject:
   - component: {fileID: 1840345277}
   - component: {fileID: 1840345276}
   - component: {fileID: 1840345278}
+  - component: {fileID: 1840345279}
   m_Layer: 0
   m_Name: UtilityTester
   m_TagString: Untagged
@@ -1870,6 +1718,152 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     m_description: 
+--- !u!114 &1840345279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840345275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e8420d2ba71604cb01b817c77da495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1840345279}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_eventListener
+      Entry: 7
+      Data: 0|Utility.Helper.GlobalEventListener, Assembly-CSharp
+    - Name: m_eventManger
+      Entry: 10
+      Data: 0
+    - Name: m_addEventName
+      Entry: 6
+      Data: 
+    - Name: m_eventName
+      Entry: 1
+      Data: sdfgsdfg
+    - Name: m_eventDescription
+      Entry: 1
+      Data: vgbnbnmbn,mbn,nm,.n,m.m,.vgncgcncvbncvbncvbnvbnvbmvmvmvbmvbmvbvbnmvbnmvbnvbnvvbn
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_globalEvents
+      Entry: 7
+      Data: 1|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Utility.Helper.GlobalEventData,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 2|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: sdfgsdfg
+    - Name: $v
+      Entry: 7
+      Data: Utility.Helper.GlobalEventData, Assembly-CSharp
+    - Name: m_event
+      Entry: 7
+      Data: 3|UnityEngine.Events.UnityEvent, UnityEngine.CoreModule
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 4|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_description
+      Entry: 1
+      Data: vgbnbnmbn,mbn,nm,.n,m.m,.vgncgcncvbncvbncvbnvbnvbmvmvmvbmvbmvbvbnmvbnmvbnvbnvvbn
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: c
+    - Name: $v
+      Entry: 7
+      Data: Utility.Helper.GlobalEventData, Assembly-CSharp
+    - Name: m_event
+      Entry: 7
+      Data: 6|UnityEngine.Events.UnityEvent, UnityEngine.CoreModule
+    - Name: m_PersistentCalls
+      Entry: 7
+      Data: 7|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
+    - Name: m_Calls
+      Entry: 7
+      Data: 8|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_description
+      Entry: 1
+      Data: Event added by a GlobalEventListener
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &1925187319
 GameObject:
   m_ObjectHideFlags: 0
