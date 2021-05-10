@@ -24,6 +24,9 @@ namespace Utility.ObjectPool
 
         private readonly Dictionary<string, ManagedPool> m_poolDict = new Dictionary<string, ManagedPool>();
 
+        public event Action OnObjectCreated;
+        public event Action OnObjectReturned;
+
         private void Awake()
         {
             InitialiseAllPools();
@@ -56,14 +59,14 @@ namespace Utility.ObjectPool
 
             string _key = ManagedPool.GetKey(prefab);
 
-            if (!m_poolDict.ContainsKey(_key)) return null;
-
-            return m_poolDict[_key].GetPrefab(position, rotation);
+            return GetFromPool(_key, position, rotation);
         }
         
         public GameObject GetFromPool(string key, Vector3 position, Quaternion rotation)
         {
             if (!m_poolDict.ContainsKey(key)) return null;
+
+            OnObjectCreated?.Invoke();
 
             return m_poolDict[key].GetPrefab(position, rotation);
         }
@@ -81,6 +84,8 @@ namespace Utility.ObjectPool
             if (!m_poolDict.ContainsKey(_key)) return;
 
             m_poolDict[_key].AddPrefab(prefab);
+
+            OnObjectReturned?.Invoke();
         }
     }
 }

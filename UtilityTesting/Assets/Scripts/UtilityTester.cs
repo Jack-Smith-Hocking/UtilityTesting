@@ -46,6 +46,7 @@ public class UtilityTester : MonoBehaviour
     private void Awake()
     {
         TestMonoInvoker();
+        KeyCodeEventMapper.Instance.AddMappedKey(KeyCode.None, KeyCode.Tab, () => { print("Pressed Tab"); });
     }
 
     // Update is called once per frame

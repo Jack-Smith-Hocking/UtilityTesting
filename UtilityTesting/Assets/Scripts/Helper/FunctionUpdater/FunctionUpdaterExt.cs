@@ -3,9 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using Sirenix.OdinInspector;
 
 namespace Utility.Helper
 {
+    public class FunctionData
+    {
+        public UpdateType UpdateStamp { get; private set; } = UpdateType.NORMAL;
+        public string FunctionName { get; private set; } = "";
+        public bool CancelUpdate { get; private set; } = false;
+        public bool IsActive { get; private set; } = false;
+
+        private Func<bool> m_updateFunction;
+
+        public FunctionData(Func<bool> updateFunction, string functionName, bool isActive, UpdateType updateType)
+        {
+            m_updateFunction = updateFunction;
+            IsActive = isActive;
+
+            FunctionName = functionName;
+            UpdateStamp = updateType;
+        }
+
+        public bool Update()
+        {
+            if (!IsActive) return true;
+            if (CancelUpdate) return false;
+
+            bool _update = m_updateFunction.Invoke();
+            CancelUpdate = !_update;
+
+            return _update;
+        }
+
+        public void Pause() => IsActive = false;
+        public void Resume() => IsActive = true;
+        public void Cancel() => CancelUpdate = true;
+
+        public void SetActive(bool active) => IsActive = active;
+    }
+
     // Split the class into partial for organisation, holds the class definitions for
     // FunctionUpdateHandler and FunctionData
     public static partial class FunctionUpdater
@@ -80,42 +117,6 @@ namespace Utility.Helper
             private void FixedUpdate() => UpdateData(UpdateType.FIXED);
             private void Update() => UpdateData(UpdateType.NORMAL);
             private void LateUpdate() => UpdateData(UpdateType.LATE);
-        }
-
-        public class FunctionData
-        {
-            public UpdateType UpdateStamp { get; private set; } = UpdateType.NORMAL;
-            public string FunctionName { get; private set; } = "";
-            public bool CancelUpdate { get; private set; } = false;
-            public bool IsActive { get; private set; } = false;
-
-            private Func<bool> m_updateFunction;
-
-            public FunctionData(Func<bool> updateFunction, string functionName, bool isActive, UpdateType updateType)
-            {
-                m_updateFunction = updateFunction;
-                IsActive = isActive;
-
-                FunctionName = functionName;
-                UpdateStamp = updateType;
-            }
-
-            public bool Update()
-            {
-                if (!IsActive) return true;
-                if (CancelUpdate) return false;
-
-                bool _update = m_updateFunction.Invoke();
-                CancelUpdate = !_update;
-
-                return _update;
-            }
-
-            public void Pause() => IsActive = false;
-            public void Resume() => IsActive = true;
-            public void Cancel() => CancelUpdate = true;
-
-            public void SetActive(bool active) => IsActive = active;
         }
     }
 }

@@ -14,20 +14,8 @@ namespace Utility.Helper
 
     public static partial class FunctionUpdater
     {
-        private static GameObject m_updateHandlerObject;
-        private static FunctionUpdateHandler m_updateHandler;
-
-        /// <summary>
-        /// Check if there is an active FunctionUpdateHandler, if there isn't, create one
-        /// </summary>
-        private static void InitialiseIfRequired()
-        {
-            if (m_updateHandlerObject.IsNull())
-            {
-                m_updateHandlerObject = new GameObject("FunctionUpdater_Handler");
-                m_updateHandler = m_updateHandlerObject.AddComponent(typeof(FunctionUpdateHandler)) as FunctionUpdateHandler;
-            }
-        }
+        private static Singleton<FunctionUpdateHandler> m_singletonUpdateHandler = new Singleton<FunctionUpdateHandler>(nameof(FunctionUpdateHandler));
+        private static FunctionUpdateHandler HandlerInstance => m_singletonUpdateHandler.Instance;
 
         /// <summary>
         /// Add an Action to the static update queue
@@ -54,13 +42,11 @@ namespace Utility.Helper
         {
             FunctionData _updateData = new FunctionData(updateFunc, functionName, active, updateType);
 
-            InitialiseIfRequired();
-
-            m_updateHandler.AddUpdateData(_updateData);
+            HandlerInstance.AddUpdateData(_updateData);
 
             return _updateData;
         }
 
-        public static void CancelAllWithName(string functionName) => m_updateHandler.RemoveAllByName(functionName);
+        public static void CancelAllWithName(string functionName) => HandlerInstance.RemoveAllByName(functionName);
     }
 }

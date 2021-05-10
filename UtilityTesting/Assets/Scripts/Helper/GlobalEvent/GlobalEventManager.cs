@@ -82,7 +82,8 @@ namespace Utility.Helper
 
     public class GlobalEventManager : SerializedMonoBehaviour
     {
-        public static GlobalEventManager Instance = null;
+        public static GlobalEventManager Instance => m_singleton.Instance;
+        private static Singleton<GlobalEventManager> m_singleton = new Singleton<GlobalEventManager>(nameof(GlobalEventManager));
 
         public GlobalEventListener m_eventListener;
 
@@ -90,10 +91,7 @@ namespace Utility.Helper
 
         public List<string> ListOfKeys => m_globalEvents.Keys.ToList();
 
-        private void Awake()
-        {
-            Instance = this;
-        }
+        private void Awake() => m_singleton.SetInstance(this);
 
         public string GetEventDescription(string eventName)
         {

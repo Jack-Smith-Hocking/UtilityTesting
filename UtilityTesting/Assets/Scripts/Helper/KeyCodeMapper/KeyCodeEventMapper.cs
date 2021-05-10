@@ -39,12 +39,17 @@ namespace Utility.Helper
         }
     }
 
-    public class KeyCodeMapper : SerializedMonoBehaviour
+    public class KeyCodeEventMapper : SerializedMonoBehaviour
     {
+        public static KeyCodeEventMapper Instance => m_singleton.Instance;
+        [SerializeField] private static Singleton<KeyCodeEventMapper> m_singleton = new Singleton<KeyCodeEventMapper>(nameof(KeyCodeEventMapper));
+
         [SerializeField] private List<MappedKey> m_mappedKeys = new List<MappedKey>();
 
         private void Awake()
         {
+            m_singleton.SetInstance(this);
+
             FunctionUpdater.CreateUpdater(() =>
             {
                 foreach (MappedKey _mappedKey in m_mappedKeys)
