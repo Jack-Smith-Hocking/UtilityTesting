@@ -25,67 +25,10 @@ namespace Utility.Helper
         }
     }
 
-    [InlineProperty, HideLabel]
-    public class GlobalEventListener
-    {
-        [FoldoutGroup("Event Listener")]
-        [SerializeField, Required] private GlobalEventManager m_eventManger;
-
-        [Space]
-
-        [FoldoutGroup("Event Listener")]
-        [InlineButton(nameof(AddEvent))]
-        [SerializeField] private string m_addEventName;
-
-        [Space(8)]
-
-        [FoldoutGroup("Event Listener")]
-        [ValueDropdown(nameof(GetGLobalEventsOptions)), OnInspectorGUI(nameof(UpdateSelected))]
-        [SerializeField] private string m_eventName;
-
-        [FoldoutGroup("Event Listener")]
-        [ReadOnly, TextArea, HideLabel]
-        [SerializeField] private string m_eventDescription;
-
-        private void UpdateSelected(string newEventName)
-        {
-            if (m_eventManger == null) return;
-
-            m_eventDescription = m_eventManger.GetEventDescription(newEventName);
-
-            GetGLobalEventsOptions();
-        }
-
-        private List<string> GetGLobalEventsOptions()
-        {
-            if (m_eventManger == null)
-            {
-                m_eventName = "N/A";
-                return new List<string>();
-            }
-
-            List<string> _options = m_eventManger.ListOfKeys;
-
-            if (!_options.Contains(m_eventName)) m_eventName = "N/A";
-
-            return _options;
-        }
-
-        private void AddEvent()
-        {
-            if (m_eventManger == null) return;
-
-            m_eventManger.AddEvent(m_addEventName, () => { }, $"Event added by a GlobalEventListener");
-            m_eventName = m_addEventName;
-        }
-    }
-
     public class GlobalEventManager : SerializedMonoBehaviour
     {
         public static GlobalEventManager Instance => m_singleton.Instance;
         private static Singleton<GlobalEventManager> m_singleton = new Singleton<GlobalEventManager>(nameof(GlobalEventManager));
-
-        public GlobalEventListener m_eventListener;
 
         [SerializeField] private Dictionary<string, GlobalEventData> m_globalEvents = new Dictionary<string, GlobalEventData>();
 
@@ -123,6 +66,13 @@ namespace Utility.Helper
             if (_valueHasBeenSet) return;
 
             Debug.LogWarning($"Event of name '{eventName}' was already found in the global events, event was not added");
+        }
+
+        public void CallEvent(string eventName)
+        {
+            if (!m_globalEvents.ContainsKey(eventName)) return;
+
+            m_globalEvents[eventName].m_event?.Invoke();
         }
     }
 }

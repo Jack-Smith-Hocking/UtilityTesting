@@ -40,7 +40,7 @@ public class SimpleController : MonoBehaviour
         _mouseDir = Quaternion.Euler(90, 0, 0) * _mouseDir;
         _mouseDir.y = 0;
 
-        Debug.DrawRay(transform.position, transform.position + (_mouseDir * 10));
+        //Debug.DrawRay(transform.position, transform.position + (_mouseDir * 10));
 
         transform.forward = _mouseDir;
     }

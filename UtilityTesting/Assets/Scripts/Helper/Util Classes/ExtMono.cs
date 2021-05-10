@@ -57,7 +57,7 @@ namespace Utility.Helper
         /// </summary>
         /// <param name="action">Action to perform</param>
         /// <param name="repeatCount">Amount of times to perform, once per frame</param>
-        public void FrameRepeat(System.Action action, uint repeatCount) => RepeatCount(action, repeatCount, null);
+        public void FrameRepeat(System.Action<int> action, uint repeatCount) => RepeatCount(action, repeatCount, null);
 
         /// <summary>
         /// Repeat an action forever
@@ -71,7 +71,7 @@ namespace Utility.Helper
         /// <param name="action">Action to perform</param>
         /// <param name="repeatCount">Amount of times to perform</param>
         /// <param name="yieldInstruction">The instructions for the yield (e.g. new WaitForSeonds(2))</param>
-        public void RepeatCount(System.Action action, uint repeatCount, YieldInstruction yieldInstruction) => m_mono.StartCoroutine(CoroutineRepeatCount(action, repeatCount, yieldInstruction));
+        public void RepeatCount(System.Action<int> action, uint repeatCount, YieldInstruction yieldInstruction) => m_mono.StartCoroutine(CoroutineRepeatCount(action, repeatCount, yieldInstruction));
 
         private IEnumerator CorutineRepeatForever(System.Action action, YieldInstruction yieldInstruction)
         {
@@ -82,13 +82,13 @@ namespace Utility.Helper
                 action?.Invoke();
             }
         }
-        private IEnumerator CoroutineRepeatCount(System.Action action, uint repeatCount, YieldInstruction yieldInstruction)
+        private IEnumerator CoroutineRepeatCount(System.Action<int> action, uint repeatCount, YieldInstruction yieldInstruction)
         {
             for (int _repeatIndex = 0; _repeatIndex < repeatCount; _repeatIndex++)
             {
                 yield return yieldInstruction;
 
-                action?.Invoke();
+                action?.Invoke(_repeatIndex);
             }
         }
         #endregion

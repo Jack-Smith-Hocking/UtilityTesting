@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 namespace Utility.Helper
 {
     [System.Serializable]
-    public struct MappedKey
+    public struct KeyCodeEventData
     {
         [TabGroup("Key")]
         public KeyCode m_modifierKeyCode;
@@ -20,7 +20,7 @@ namespace Utility.Helper
         [TabGroup("Description"), TextArea()]
         public string m_description;
 
-        public MappedKey(KeyCode mod, KeyCode primary, System.Action mapAction, string description = "")
+        public KeyCodeEventData(KeyCode mod, KeyCode primary, System.Action mapAction, string description = "")
         {
             m_modifierKeyCode = mod;
             m_primaryKeyCode = primary;
@@ -41,10 +41,13 @@ namespace Utility.Helper
 
     public class KeyCodeEventMapper : SerializedMonoBehaviour
     {
+        [FoldoutGroup("GlobalEventFetcher")]
+        [SerializeField] private GlobalEventNameFetcher m_nameFetcher;
+
         public static KeyCodeEventMapper Instance => m_singleton.Instance;
         [SerializeField] private static Singleton<KeyCodeEventMapper> m_singleton = new Singleton<KeyCodeEventMapper>(nameof(KeyCodeEventMapper));
 
-        [SerializeField] private List<MappedKey> m_mappedKeys = new List<MappedKey>();
+        [SerializeField] private List<KeyCodeEventData> m_mappedKeys = new List<KeyCodeEventData>();
 
         private void Awake()
         {
@@ -52,20 +55,20 @@ namespace Utility.Helper
 
             FunctionUpdater.CreateUpdater(() =>
             {
-                foreach (MappedKey _mappedKey in m_mappedKeys)
+                foreach (KeyCodeEventData _mappedKey in m_mappedKeys)
                 {
                     if (_mappedKey.IsDown()) _mappedKey.m_event?.Invoke();
                 }
             }, "MappedKeyCodes", true, UpdateType.NORMAL);
         }
 
-        public void AddMappedKey(MappedKey mappedKey)
+        public void AddMappedKey(KeyCodeEventData mappedKey)
         {
             m_mappedKeys.Add(mappedKey);
         }
         public void AddMappedKey(KeyCode mod, KeyCode primary, System.Action mapAction, string description = "")
         {
-            m_mappedKeys.Add(new MappedKey(mod, primary, mapAction, description));
+            m_mappedKeys.Add(new KeyCodeEventData(mod, primary, mapAction, description));
         }
     }
 }

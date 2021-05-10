@@ -6,7 +6,14 @@ using Sirenix.OdinInspector;
 
 public class UtilityTester : MonoBehaviour
 {
+    [FoldoutGroup("GlobalEvent 1")]
+    public GlobalEventListener m_globalEventListener = new GlobalEventListener();
+
+    [Space]
+
     public int m_iterationCount = 0;
+
+    [Space]
 
     [TabGroup("GetClosest")]
     public int m_getClosestListSize = 0;
@@ -47,6 +54,7 @@ public class UtilityTester : MonoBehaviour
     {
         TestMonoInvoker();
         KeyCodeEventMapper.Instance.AddMappedKey(KeyCode.None, KeyCode.Tab, () => { print("Pressed Tab"); });
+        m_globalEventListener.ListenToEvent(() => { print("testing events"); });
     }
 
     // Update is called once per frame

@@ -13,10 +13,7 @@ namespace Utility.Helper
 
         private string m_className;
 
-        public Singleton(string className)
-        {
-            m_className = className;
-        }
+        public Singleton(string className) => m_className = className;
 
         public T GetInstance()
         {

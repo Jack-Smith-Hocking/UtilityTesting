@@ -11,7 +11,7 @@ namespace Utility.Helper
     /// Holds the data for an event trigger
     /// </summary>
     [System.Serializable]
-    public struct EventData
+    public struct DelayedEventData
     {
         // Details
         [TabGroup("Details")]
@@ -53,12 +53,12 @@ namespace Utility.Helper
         private bool m_hasTriggered = false;
         //
 
-        [SerializeField] private List<EventData> m_events = new List<EventData>();
+        [SerializeField] private List<DelayedEventData> m_events = new List<DelayedEventData>();
 
         /// <summary>
         /// Starts triggering the events
         /// </summary>
-        private void StartEventChain(Action<EventData> action)
+        private void StartEventChain(Action<DelayedEventData> action)
         {
             for (int i = 0; i < m_events.Count; i++)
             {
@@ -72,7 +72,7 @@ namespace Utility.Helper
         /// <param name="action">Action to perform on an event</param>
         /// <param name="ed">The EventData to act upon</param>
         /// <returns></returns>
-        IEnumerator FireEvent(Action<EventData> action, EventData ed)
+        IEnumerator FireEvent(Action<DelayedEventData> action, DelayedEventData ed)
         {
             yield return new WaitForSeconds(ed.m_eventDelay);
 
@@ -88,7 +88,7 @@ namespace Utility.Helper
                 m_lastTriggerTime = Time.time;
                 m_hasTriggered = true;
 
-                StartEventChain((EventData d) => { d.m_onEventTriggered.Invoke(); });
+                StartEventChain((DelayedEventData d) => { d.m_onEventTriggered.Invoke(); });
             }
         }
     }
