@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utility.Rewind
+namespace Helper.Rewind
 {
     public class RewindObject : MonoBehaviour
     {

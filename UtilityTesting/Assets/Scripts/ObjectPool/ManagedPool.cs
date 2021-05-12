@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
-using Utility.Helper;
+using Helper.Utility;
 
-namespace Utility.ObjectPool
+namespace Helper.ObjectPool
 {
     [System.Serializable, InlineProperty, HideLabel]
     public struct PoolPrefab
@@ -23,7 +23,7 @@ namespace Utility.ObjectPool
                 return;
             }
 
-            UniqueID _id = UtilGO.ExtractComponent<UniqueID>(prefab);
+            UniqueID _id = Utility.Util.GO.ExtractComponent<UniqueID>(prefab);
 
             key = _id.UniqueIdentifier;
         }

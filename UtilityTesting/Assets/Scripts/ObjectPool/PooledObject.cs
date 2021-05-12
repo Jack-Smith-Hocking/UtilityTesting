@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utility.ObjectPool
+namespace Helper.ObjectPool
 {
     public abstract class PooledObject : MonoBehaviour, IPooledObject
     {

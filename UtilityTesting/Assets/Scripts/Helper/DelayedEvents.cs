@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-namespace Utility.Helper
+namespace Helper.Utility
 {
     /// <summary>
     /// Holds the data for an event trigger

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utility.Helper
+namespace Helper.Utility
 {
     public class BitLock
     {

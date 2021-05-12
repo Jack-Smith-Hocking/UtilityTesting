@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
-using Utility.Helper;
+using Helper.Utility;
 using Sirenix.OdinInspector;
 
-namespace Utility.ObjectPool
+namespace Helper.ObjectPool
 {
     public class ObjectPool : MonoBehaviour
     {

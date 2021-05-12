@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Utility.Helper;
+using Helper.Utility;
 
 public class SimpleWander : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class SimpleWander : MonoBehaviour
         Vector3 _pos = transform.position;
         _pos.y = m_target.y;
 
-        if (UtilMath.InDistance(_pos, m_target, m_navAgent.stoppingDistance) || m_navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        if (Util.Math.InDistance(_pos, m_target, m_navAgent.stoppingDistance) || m_navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
             UpdatePosition();
         }
@@ -29,7 +29,7 @@ public class SimpleWander : MonoBehaviour
 
     private void UpdatePosition()
     {
-        m_target = UtilRand.RandNavPos(transform.position, m_maxWander, 1000);
+        m_target = Util.Rand.NavMeshPosition(transform.position, m_maxWander, 1000);
 
         m_navAgent.SetDestination(m_target);
     }

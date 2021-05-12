@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-namespace Utility.Helper
+namespace Helper.Utility
 {
     [System.Serializable]
     public struct KeyCodeEventData

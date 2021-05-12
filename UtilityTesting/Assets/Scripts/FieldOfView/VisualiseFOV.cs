@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Utility.FOV
+namespace Helper.FOV
 {
     public struct EdgeInfo
     {

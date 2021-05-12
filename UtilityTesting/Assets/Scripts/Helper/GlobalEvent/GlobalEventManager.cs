@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Utility.Helper
+namespace Helper.Utility
 {
     [System.Serializable]
     public struct GlobalEventData

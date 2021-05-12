@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Utility.Helper.Extensions
+namespace Helper.Utility
 {
     public static class ExtMath
     {
@@ -22,16 +22,22 @@ namespace Utility.Helper.Extensions
         #region Distance Squared
         public static float DistanceSqrd(this Vector2 a, Vector2 b) => (a - b).sqrMagnitude;
         public static float DistanceSqrd(this Vector3 a, Vector3 b) => (a - b).sqrMagnitude;
+        public static float DistanceSqrd(this Transform a, Transform b) => (a.position - b.position).sqrMagnitude;
+        public static float DistanceSqrd(this GameObject a, GameObject b) => (a.transform.position - b.transform.position).sqrMagnitude;
         #endregion
 
         #region InDistance
         public static bool InDistance(this Vector2 a, Vector2 b, float dist) => (a - b).sqrMagnitude <= (dist * dist);
         public static bool InDistance(this Vector3 a, Vector3 b, float dist) => (a - b).sqrMagnitude <= (dist * dist);
+        public static bool InDistance(this Transform a, Transform b, float dist) => (a.position - b.position).sqrMagnitude <= (dist * dist);
+        public static bool InDistance(this GameObject a, GameObject b, float dist) => (a.transform.position - b.transform.position).sqrMagnitude <= (dist * dist);
         #endregion
 
         #region OutDistance
         public static bool OutDistance(this Vector2 a, Vector2 b, float dist) => (a - b).sqrMagnitude > (dist * dist);
         public static bool OutDistance(this Vector3 a, Vector3 b, float dist) => (a - b).sqrMagnitude > (dist * dist);
+        public static bool OutDistance(this Transform a, Transform b, float dist) => (a.position - b.position).sqrMagnitude > (dist * dist);
+        public static bool OutDistance(this GameObject a, GameObject b, float dist) => (a.transform.position - b.transform.position).sqrMagnitude > (dist * dist);
         #endregion
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using Sirenix.OdinInspector.Editor;
 
-namespace Utility.FOV
+namespace Helper.FOV
 {
     [CustomEditor(typeof(CalculateFOV))]
     public class CalculateFOV_Editor : OdinEditor

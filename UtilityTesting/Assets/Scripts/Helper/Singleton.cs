@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Utility.Helper
+namespace Helper.Utility
 {
     public class Singleton<T> where T : MonoBehaviour
     {

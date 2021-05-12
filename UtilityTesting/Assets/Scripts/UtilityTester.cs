@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Utility.Helper;
+using Helper.Utility;
 using Sirenix.OdinInspector;
 
 public class UtilityTester : MonoBehaviour
@@ -32,14 +32,14 @@ public class UtilityTester : MonoBehaviour
         List<Vector3> _points = new List<Vector3>(m_getClosestListSize);
         Vector3 _point = transform.position;
 
-        for (int _listSizeIndex = 0; _listSizeIndex < m_iterationCount; _listSizeIndex++)
+        for (int _listSizeIndex = 0; _listSizeIndex < m_getClosestListSize; _listSizeIndex++)
         {
-            _points.Add(UtilRand.RandVector());
+            _points.Add(Util.Rand.Vector());
         }
 
         for (int _index = 0; _index < m_iterationCount; _index++)
         {
-            UtilMath.GetClosestPoint(_point, _points, out Vector3 _closestPoint);
+            Util.Math.GetClosestPoint(_point, _points, out Vector3 _closestPoint);
         }
     }
 

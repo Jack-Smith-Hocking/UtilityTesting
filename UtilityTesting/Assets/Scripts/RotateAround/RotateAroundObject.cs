@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Utility.Helper;
-using Utility.Helper.Extensions;
+using Helper.Utility;
 
 using Sirenix.OdinInspector;
 
@@ -162,7 +161,7 @@ public class RotateAroundObject : MonoBehaviour
     /// <returns></returns>
     private Vector3 CalculateTargetPos(float currentRot)
     {
-        Vector3 _dir = UtilMath.RotateBy(currentRot, m_rotateAxis, m_objectAxis);
+        Vector3 _dir = Util.Math.RotateBy(currentRot, m_rotateAxis, m_objectAxis);
         _dir = m_rotationAnchor.TransformDirection(_dir);
 
         return m_rotationAnchor.position + m_offset + (_dir * m_rotRadius);
@@ -172,7 +171,7 @@ public class RotateAroundObject : MonoBehaviour
     {
         if (!CanRotate || m_rotationAnchor == null) return;
 
-        bool _inDistance = UtilMath.InDistance(transform.position, m_targetPos, 0.1f);
+        bool _inDistance = Util.Math.InDistance(transform.position, m_targetPos, 0.1f);
 
         m_currentRot += _inDistance ? Time.fixedDeltaTime * m_rotateSpeed : 0;
         m_currentSpeed = _inDistance ? m_rotateSpeed : m_catchUpSpeed;

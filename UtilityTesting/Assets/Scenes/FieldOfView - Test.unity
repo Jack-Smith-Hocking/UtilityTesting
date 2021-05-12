@@ -1537,7 +1537,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_globalEvents
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Utility.Helper.GlobalEventData,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Helper.Utility.GlobalEventData,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
@@ -1557,35 +1557,13 @@ MonoBehaviour:
       Data: dh
     - Name: $v
       Entry: 7
-      Data: Utility.Helper.GlobalEventData, Assembly-CSharp
+      Data: Helper.Utility.GlobalEventData, Assembly-CSharp
     - Name: m_event
-      Entry: 7
-      Data: 2|UnityEngine.Events.UnityEvent, UnityEngine.CoreModule
-    - Name: m_PersistentCalls
-      Entry: 7
-      Data: 3|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
-    - Name: m_Calls
-      Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: m_description
-      Entry: 1
-      Data: sdgdhvhj
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -1600,35 +1578,13 @@ MonoBehaviour:
       Data: dgg
     - Name: $v
       Entry: 7
-      Data: Utility.Helper.GlobalEventData, Assembly-CSharp
+      Data: Helper.Utility.GlobalEventData, Assembly-CSharp
     - Name: m_event
-      Entry: 7
-      Data: 5|UnityEngine.Events.UnityEvent, UnityEngine.CoreModule
-    - Name: m_PersistentCalls
-      Entry: 7
-      Data: 6|UnityEngine.Events.PersistentCallGroup, UnityEngine.CoreModule
-    - Name: m_Calls
-      Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[UnityEngine.Events.PersistentCall,
-        UnityEngine.CoreModule]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
+      Entry: 6
       Data: 
     - Name: m_description
-      Entry: 1
-      Data: sdsdfgfghdfghghh
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -1864,8 +1820,8 @@ MonoBehaviour:
       m_eventName: dh
     m_addEventName: 
     m_eventDescription: sdgdhvhj
-  m_iterationCount: 0
-  m_getClosestListSize: 0
+  m_iterationCount: 1
+  m_getClosestListSize: 5
   m_testGetClosest: 0
   m_monoInvokerToggleObject: {fileID: 0}
   m_testMonoInvoker: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Utility.Helper
+namespace Helper.Utility
 {
     [InlineProperty, System.Serializable, HideLabel]
     public class GlobalEventNameFetcher
@@ -63,7 +63,7 @@ namespace Utility.Helper
         /// <param name="listener">Action to listen to global event</param>
         public void ListenToEvent(System.Action listener)
         {
-            if (UtilGen.IsNUll(m_nameFetcher.Manager)) return;
+            if (!m_nameFetcher.HasManager) return;
 
             m_nameFetcher.Manager.ListenToEvent(m_nameFetcher.m_eventName, listener);
         }

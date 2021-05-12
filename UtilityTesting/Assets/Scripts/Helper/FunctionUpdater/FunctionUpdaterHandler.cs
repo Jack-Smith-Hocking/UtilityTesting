@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using Sirenix.OdinInspector;
 
-namespace Utility.Helper
+namespace Helper.Utility
 {
     public class FunctionData
     {

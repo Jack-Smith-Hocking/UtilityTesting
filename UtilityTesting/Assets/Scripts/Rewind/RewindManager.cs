@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Utility.Helper.Extensions;
+using Helper.Utility;
 
-namespace Utility.Rewind
+namespace Helper.Rewind
 {
     public class RewindManager : MonoBehaviour
     {

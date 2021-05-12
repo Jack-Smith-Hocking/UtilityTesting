@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utility.Helper
+namespace Helper.Utility
 {
     public static class ExtGen
     {
@@ -15,7 +15,8 @@ namespace Utility.Helper
         public static bool IsNotEmpty<T>(this T[] collection) => collection.Length > 0;
         public static bool IsNotEmpty<T>(this List<T> collection) => collection.Count > 0;
 
-        public static void ToggleActive(this GameObject obj) => obj.SetActive(!obj.activeInHierarchy);
+        public static bool DoesNotContainKey<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key) => dict.ContainsKey(key) == false;
+        public static bool DoesNotContainValue<TKey, TValue>(this Dictionary<TKey, TValue> dict, TValue value) => dict.ContainsValue(value) == false;
 
         public static bool TrySetValue<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue val, bool overwrite = false)
         {
