@@ -42,11 +42,15 @@ namespace Utility.Helper
         {
             FunctionData _updateData = new FunctionData(updateFunc, functionName, active, updateType);
 
-            HandlerInstance.AddUpdateData(_updateData);
+            HandlerInstance.AddFunctionData(_updateData);
 
             return _updateData;
         }
 
+        /// <summary>
+        /// Remove all the listeners that have a specified name
+        /// </summary>
+        /// <param name="functionName">Name of the listeners to remove</param>
         public static void CancelAllWithName(string functionName) => HandlerInstance.RemoveAllByName(functionName);
     }
 }

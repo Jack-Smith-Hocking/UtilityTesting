@@ -9,7 +9,7 @@ namespace Utility.Helper
 {
     public class FunctionData
     {
-        public UpdateType UpdateStamp { get; private set; } = UpdateType.NORMAL;
+        public UpdateType UpdateLoopType { get; private set; } = UpdateType.NORMAL;
         public string FunctionName { get; private set; } = "";
         public bool CancelUpdate { get; private set; } = false;
         public bool IsActive { get; private set; } = false;
@@ -22,7 +22,7 @@ namespace Utility.Helper
             IsActive = isActive;
 
             FunctionName = functionName;
-            UpdateStamp = updateType;
+            UpdateLoopType = updateType;
         }
 
         public bool Update()
@@ -36,10 +36,14 @@ namespace Utility.Helper
             return _update;
         }
 
+        /// <summary>Stop the function from updating</summary>
         public void Pause() => IsActive = false;
+        /// <summary>Resume updating the function</summary>
         public void Resume() => IsActive = true;
+        /// <summary>Fully cancel this function, removes it from update cycle completely</summary>
         public void Cancel() => CancelUpdate = true;
 
+        /// <summary>Set the update state of this function</summary>
         public void SetActive(bool active) => IsActive = active;
     }
 
@@ -53,25 +57,38 @@ namespace Utility.Helper
 
             private List<FunctionData> m_cancelledData = new List<FunctionData>();
 
-            public void AddUpdateData(FunctionData updateData)
+            /// <summary>
+            /// Add a FunctionData to the update loop of this handler
+            /// </summary>
+            /// <param name="updateData"></param>
+            public void AddFunctionData(FunctionData updateData)
             {
-                if (updateData == null) return;
-                if (!m_updateDict.ContainsKey(updateData.UpdateStamp))
+                if (updateData.IsNull()) return;
+
+                if (m_updateDict.DoesNotContainKey(updateData.UpdateLoopType))
                 {
-                    m_updateDict[updateData.UpdateStamp] = new List<FunctionData>(10);
+                    m_updateDict[updateData.UpdateLoopType] = new List<FunctionData>(5);
                 }
 
-                m_updateDict[updateData.UpdateStamp].Add(updateData);
+                m_updateDict[updateData.UpdateLoopType].Add(updateData);
             }
+            /// <summary>
+            /// Remove a FunctionData from the update loop of this handler
+            /// </summary>
+            /// <param name="updateData"></param>
             public void RemoveUpdateData(FunctionData updateData)
             {
-                if (updateData == null) return;
-                if (!m_updateDict.ContainsKey(updateData.UpdateStamp)) return;
-                if (m_updateDict[updateData.UpdateStamp] == null) return;
+                if (updateData.IsNull()) return;
+                if (m_updateDict.DoesNotContainKey(updateData.UpdateLoopType)) return;
+                if (m_updateDict[updateData.UpdateLoopType].IsNull()) return;
 
-                m_updateDict[updateData.UpdateStamp].Remove(updateData);
+                m_updateDict[updateData.UpdateLoopType].Remove(updateData);
             }
 
+            /// <summary>
+            /// Remove all listeners with the specified name from all update loops
+            /// </summary>
+            /// <param name="functionName"></param>
             public void RemoveAllByName(string functionName)
             {
                 m_cancelledData.Clear();
@@ -102,11 +119,11 @@ namespace Utility.Helper
             }
             private void FlushCancelled()
             {
-                if (m_cancelledData.Count == 0) return;
+                if (m_cancelledData.IsEmpty()) return;
 
                 foreach (FunctionData _cancelledData in m_cancelledData)
                 {
-                    m_updateDict[_cancelledData.UpdateStamp].Remove(_cancelledData);
+                    m_updateDict[_cancelledData.UpdateLoopType].Remove(_cancelledData);
                 }
 
                 m_cancelledData.Clear();

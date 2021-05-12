@@ -8,10 +8,12 @@ namespace Utility.Helper
     [InlineProperty, System.Serializable, HideLabel]
     public class GlobalEventNameFetcher
     {
+        [Tooltip("The EventManager to fetch events from")]
         [HideIf(nameof(m_useManagerInstance))]
-        [SerializeField, Required] protected GlobalEventManager m_globalEventManager;
-
-        [SerializeField, Required] protected bool m_useManagerInstance;
+        [SerializeField, Required] private GlobalEventManager m_globalEventManager;
+        
+        [Tooltip("Whether or not to use the global event manager")]
+        [SerializeField] private bool m_useManagerInstance;
 
         [Space]
 
@@ -19,10 +21,11 @@ namespace Utility.Helper
         public string m_eventName;
 
         public GlobalEventManager Manager => m_useManagerInstance ? GlobalEventManager.Instance : m_globalEventManager;
+        public bool HasManager => Manager.IsNotNull();
 
-        public List<string> GetGlobalEventsOptions()
+        private List<string> GetGlobalEventsOptions()
         {
-            if (UtilGen.IsNUll(Manager))
+            if (!HasManager)
             {
                 m_eventName = "N/A";
                 return new List<string>();
@@ -40,16 +43,24 @@ namespace Utility.Helper
     public class GlobalEventListener
     {
         [TabGroup("NameFetcher")]
+        [Tooltip("Fetches the name of events to minimise mistakes")]
+        [OnInspectorGUI(nameof(UpdateSelected))]
         [SerializeField] private GlobalEventNameFetcher m_nameFetcher = new GlobalEventNameFetcher();
 
         [TabGroup("Listener")]
+        [Tooltip("The name of the event you want to add")]
         [InlineButton(nameof(AddEvent))]
         [SerializeField] private string m_addEventName;
 
         [TabGroup("Listener")]
+        [Tooltip("The description of the currently selected event")]
         [ReadOnly, TextArea, HideLabel]
         [SerializeField] private string m_eventDescription;
 
+        /// <summary>
+        /// Listen to the event associated with this GlobalEventListener
+        /// </summary>
+        /// <param name="listener">Action to listen to global event</param>
         public void ListenToEvent(System.Action listener)
         {
             if (UtilGen.IsNUll(m_nameFetcher.Manager)) return;
@@ -57,18 +68,16 @@ namespace Utility.Helper
             m_nameFetcher.Manager.ListenToEvent(m_nameFetcher.m_eventName, listener);
         }
 
-        private void UpdateSelected(string newEventName)
+        private void UpdateSelected()
         {
-            if (UtilGen.IsNUll(m_nameFetcher.Manager)) return;
+            if (!m_nameFetcher.HasManager) return;
 
-            m_eventDescription = m_nameFetcher.Manager.GetEventDescription(newEventName);
-
-            m_nameFetcher.GetGlobalEventsOptions();
+            m_eventDescription = m_nameFetcher.Manager.GetEventDescription(m_nameFetcher.m_eventName);
         }
 
         private void AddEvent()
         {
-            if (UtilGen.IsNUll(m_nameFetcher.Manager)) return;
+            if (!m_nameFetcher.HasManager) return;
 
             m_nameFetcher.Manager.AddEvent(m_addEventName, () => { }, $"Event added by a GlobalEventListener");
             m_nameFetcher.m_eventName = m_addEventName;

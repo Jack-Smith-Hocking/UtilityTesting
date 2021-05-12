@@ -15,22 +15,30 @@ namespace Utility.Helper
 
         public Singleton(string className) => m_className = className;
 
+        /// <summary>
+        /// Get (or create) an instance of this singleton type
+        /// </summary>
+        /// <returns>Singleton</returns>
         public T GetInstance()
         {
-            if (UtilGen.IsNotNull(m_instance)) return m_instance;
-
-            if (!CheckIfInstanceExists())
+            if (CheckIfInstanceExists() == false)
             {
                 CreateNewInstance();
             }
 
             return m_instance;
         }
+        /// <summary>
+        /// Set the instance of this singleton
+        /// </summary>
+        /// <param name="instance">Instance to manage</param>
+        /// <param name="overrideCurrent">If there is a current singleton instance, overwrite it</param>
+        /// <param name="destroyCurrent">If there is a current singleton instance, destroy it and attached GameObject</param>
         public void SetInstance(T instance, bool overrideCurrent = false, bool destroyCurrent = false)
         {
-            if (UtilGen.IsNotNull(m_instance))
+            if (m_instance.IsNotNull())
             {
-                if (!overrideCurrent) return;
+                if (overrideCurrent == false) return;
 
                 if (destroyCurrent) GameObject.Destroy(m_instance.gameObject);
             }
@@ -40,24 +48,17 @@ namespace Utility.Helper
 
         private bool CheckIfInstanceExists()
         {
-            GameObject _existingObject = GameObject.Find($"_{m_className}");
-            
-            if (UtilGen.IsNUll(_existingObject)) return false;
-            
-            _existingObject.TryGetComponent<T>(out m_instance);
+            if (m_instance.IsNotNull()) return true;
 
-            if (m_instance == null)
-            {
-                m_instance = _existingObject.AddComponent<T>();
-            }
+            m_instance = GameObject.FindObjectOfType<T>();
 
-            return true;
+            return m_instance.IsNotNull();
         }
         private void CreateNewInstance()
         {
             GameObject _global = GameObject.Find("_Global");
 
-            if (UtilGen.IsNUll(_global)) _global = new GameObject("_Global");
+            if (_global.IsNull()) _global = new GameObject("_Global");
 
             GameObject _instanceObject = new GameObject($"_{m_className}");
             _instanceObject.transform.parent = _global.transform;

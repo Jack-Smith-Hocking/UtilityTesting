@@ -41,12 +41,16 @@ namespace Utility.Helper
 
     public class KeyCodeEventMapper : SerializedMonoBehaviour
     {
-        [FoldoutGroup("GlobalEventFetcher")]
-        [SerializeField] private GlobalEventNameFetcher m_nameFetcher;
-
         public static KeyCodeEventMapper Instance => m_singleton.Instance;
         [SerializeField] private static Singleton<KeyCodeEventMapper> m_singleton = new Singleton<KeyCodeEventMapper>(nameof(KeyCodeEventMapper));
 
+        [FoldoutGroup("GlobalEventFetcher")]
+        [Tooltip("Fetches the name of global events")]
+        [SerializeField] private GlobalEventNameFetcher m_nameFetcher;
+        
+        [Space]
+
+        [Tooltip("Dictionary of mapped keys")]
         [SerializeField] private List<KeyCodeEventData> m_mappedKeys = new List<KeyCodeEventData>();
 
         private void Awake()
