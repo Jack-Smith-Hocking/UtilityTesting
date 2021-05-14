@@ -21,7 +21,7 @@ namespace Helper.Utility
             /// <returns></returns>
             public static T ExtractComponent<T>(GameObject obj) where T : Component
             {
-                if (obj == null) return null;
+                if (obj.IsNull()) return null;
 
                 if (!obj.TryGetComponent<T>(out T _returnComp)) _returnComp = obj.AddComponent<T>();
 
@@ -36,7 +36,7 @@ namespace Helper.Utility
             /// <returns></returns>
             public static Transform GetChild(Transform root, string childName)
             {
-                if (root == null) throw new ArgumentNullException(nameof(root));
+                root.ThrowExceptionIfNull();
 
                 for (int _childIndex = 0; _childIndex < root.childCount; _childIndex++)
                 {

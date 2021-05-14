@@ -41,8 +41,8 @@ namespace Helper.Utility
 
     public class KeyCodeEventMapper : SerializedMonoBehaviour
     {
-        public static KeyCodeEventMapper Instance => m_singleton.Instance;
-        [SerializeField] private static Singleton<KeyCodeEventMapper> m_singleton = new Singleton<KeyCodeEventMapper>(nameof(KeyCodeEventMapper));
+        public static KeyCodeEventMapper Instance => s_singleton.Instance;
+        private static Singleton<KeyCodeEventMapper> s_singleton = new Singleton<KeyCodeEventMapper>(nameof(KeyCodeEventMapper));
 
         [FoldoutGroup("GlobalEventFetcher")]
         [Tooltip("Fetches the name of global events")]
@@ -55,7 +55,7 @@ namespace Helper.Utility
 
         private void Awake()
         {
-            m_singleton.SetInstance(this);
+            s_singleton.SetInstance(this);
 
             FunctionUpdater.CreateUpdater(() =>
             {

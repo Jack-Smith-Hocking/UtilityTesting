@@ -12,8 +12,13 @@ namespace Helper.Utility
         [ReadOnly, SerializeField] private T m_instance;
 
         private string m_className;
+        private bool m_enforceSingleton;
 
-        public Singleton(string className) => m_className = className;
+        public Singleton(string className, bool enforceSingleton = false)
+        {
+            m_className = className;
+            m_enforceSingleton = enforceSingleton;
+        }
 
         /// <summary>
         /// Get (or create) an instance of this singleton type
@@ -21,7 +26,7 @@ namespace Helper.Utility
         /// <returns>Singleton</returns>
         public T GetInstance()
         {
-            if (CheckIfInstanceExists() == false)
+            if (DoesInstanceExist() == false)
             {
                 CreateNewInstance();
             }
@@ -32,21 +37,24 @@ namespace Helper.Utility
         /// Set the instance of this singleton
         /// </summary>
         /// <param name="instance">Instance to manage</param>
-        /// <param name="overrideCurrent">If there is a current singleton instance, overwrite it</param>
-        /// <param name="destroyCurrent">If there is a current singleton instance, destroy it and attached GameObject</param>
-        public void SetInstance(T instance, bool overrideCurrent = false, bool destroyCurrent = false)
+        public void SetInstance(T instance)
         {
-            if (m_instance.IsNotNull())
-            {
-                if (overrideCurrent == false) return;
+            if (instance.IsNull()) return;
 
-                if (destroyCurrent) GameObject.Destroy(m_instance.gameObject);
+            if (m_instance.IsNotNull() && m_enforceSingleton)
+            {
+                Debug.LogWarning($"There can only be one instance of type {m_className} in the scene!") ;
+                Debug.LogWarning($"To enforce singleton pattern, destroyed GameObject '{instance.gameObject.name}' with singleton '{m_className}'");
+
+                GameObject.Destroy(instance.gameObject);
+
+                return;
             }
 
             m_instance = instance;
         }
 
-        private bool CheckIfInstanceExists()
+        private bool DoesInstanceExist()
         {
             if (m_instance.IsNotNull()) return true;
 
@@ -54,11 +62,11 @@ namespace Helper.Utility
 
             return m_instance.IsNotNull();
         }
+
         private void CreateNewInstance()
         {
             GameObject _global = GameObject.Find("_Global");
-
-            if (_global.IsNull()) _global = new GameObject("_Global");
+            _global = _global ?? new GameObject("_Global"); // Assign if null
 
             GameObject _instanceObject = new GameObject($"_{m_className}");
             _instanceObject.transform.parent = _global.transform;

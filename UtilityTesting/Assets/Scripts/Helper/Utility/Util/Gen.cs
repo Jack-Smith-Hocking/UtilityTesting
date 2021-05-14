@@ -21,6 +21,9 @@ namespace Helper.Utility
             public static bool IsNotEmpty<T>(T[] collection) => collection.Length > 0;
             public static bool IsNotEmpty<T>(List<T> collection) => collection.Count > 0;
 
+            public static T SetIfNull<T>(T obj, T value) where T : class => obj ?? value;
+            public static void ThrowExceptionIfNull<T>(T obj) where T : class => _ = obj ?? throw new System.ArgumentNullException(nameof(obj));
+
             /// <summary>
             /// Check if the collection at the key is valid, if it isn't then create a new collection at the key
             /// </summary>
@@ -28,10 +31,10 @@ namespace Helper.Utility
             /// <param name="dict">Dictionary to validate</param>
             /// <typeparam name="TKey"></typeparam>
             /// <typeparam name="TValue"></typeparam>
-            public static void ValidateCollectionValue<TKey, TValue>(TKey key, Dictionary<TKey, TValue> dict)
+            public static void ValidateCollectionValue<TKey, TValue>(TKey key, Dictionary<TKey, TValue> dict) 
                 where TValue : ICollection, new()
             {
-                if (dict == null) throw new ArgumentNullException(nameof(dict));
+                dict.ThrowExceptionIfNull();
                 if (key == null) throw new ArgumentNullException(nameof(key));
 
                 if (dict.ContainsKey(key)) return;

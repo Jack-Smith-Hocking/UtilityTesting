@@ -14,8 +14,8 @@ namespace Helper.Utility
 
     public static partial class FunctionUpdater
     {
-        private static Singleton<FunctionUpdateHandler> m_singletonUpdateHandler = new Singleton<FunctionUpdateHandler>(nameof(FunctionUpdateHandler));
-        private static FunctionUpdateHandler HandlerInstance => m_singletonUpdateHandler.Instance;
+        private static FunctionUpdateHandler HandlerInstance => s_singleton.Instance;
+        private static Singleton<FunctionUpdateHandler> s_singleton = new Singleton<FunctionUpdateHandler>(nameof(FunctionUpdateHandler));
 
         /// <summary>
         /// Add an Action to the static update queue

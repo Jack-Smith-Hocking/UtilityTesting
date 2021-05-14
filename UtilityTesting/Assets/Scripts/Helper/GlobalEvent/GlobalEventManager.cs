@@ -27,15 +27,15 @@ namespace Helper.Utility
 
     public class GlobalEventManager : SerializedMonoBehaviour
     {
-        public static GlobalEventManager Instance => m_singleton.Instance;
-        private static Singleton<GlobalEventManager> m_singleton = new Singleton<GlobalEventManager>(nameof(GlobalEventManager));
+        public static GlobalEventManager Instance => s_singleton.Instance;
+        private static Singleton<GlobalEventManager> s_singleton = new Singleton<GlobalEventManager>(nameof(GlobalEventManager));
 
         [Tooltip("Dictionary of global events")]
         [SerializeField] private Dictionary<string, GlobalEventData> m_globalEvents = new Dictionary<string, GlobalEventData>();
 
         public List<string> ListOfKeys => m_globalEvents.Keys.ToList();
 
-        private void Awake() => m_singleton.SetInstance(this);
+        private void Awake() => s_singleton.SetInstance(this);
 
         /// <summary>
         /// Get the description of the specified global event
@@ -43,7 +43,7 @@ namespace Helper.Utility
         public string GetEventDescription(string eventName)
         {
             bool _foundEvent = m_globalEvents.TryGetValue(eventName, out GlobalEventData _eventData);
-
+            
             return _foundEvent ? _eventData.m_description : "N/A";
         }
 

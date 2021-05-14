@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Helper.ObjectPool;
 using Sirenix.OdinInspector;
+using Helper.ObjectPool;
 
 public class BasicSpawner : MonoBehaviour
 {
@@ -13,9 +13,6 @@ public class BasicSpawner : MonoBehaviour
     [BoxGroup("Pool")]
     public PoolPrefab m_poolPrefab;
 
-    [BoxGroup("Pool"), InlineEditor]
-    public ObjectPool m_pool;
-
     private float m_currentTime = 0;
     
     // Update is called once per frame
@@ -25,7 +22,7 @@ public class BasicSpawner : MonoBehaviour
         {
             m_currentTime = Time.time + m_spawnDelay;
 
-            m_pool.GetFromPool(m_poolPrefab.prefab, transform.position, transform.rotation);
+            ObjectPool.Instance.Create(m_poolPrefab.Prefab, transform.position, transform.rotation);
         }
     }
 }

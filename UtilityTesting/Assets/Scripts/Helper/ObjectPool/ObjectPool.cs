@@ -10,25 +10,21 @@ namespace Helper.ObjectPool
 {
     public class ObjectPool : MonoBehaviour
     {
-        [Tooltip("Future Feature -> To allow runtime pool generation")]
-        [SerializeField] private bool m_allowDefaultSettings = false;
-
-        [Tooltip("Future Feature -> To allow runtime pool generation")]
-        [HideIfGroup("@" + nameof(m_allowDefaultSettings) + " == false")]
-        [SerializeField] private ManagedPool m_defaultPool;
-
-        [Space]
-
         [Tooltip("List of pools and associated data")]
         [SerializeField] private List<ManagedPool> m_poolData;
 
-        private readonly Dictionary<string, ManagedPool> m_poolDict = new Dictionary<string, ManagedPool>();
+        public static ObjectPool Instance => s_singleton.Instance;
+        private static Singleton<ObjectPool> s_singleton = new Singleton<ObjectPool>(nameof(ObjectPool), true);
+
+        private Dictionary<string, ManagedPool> m_poolDict = new Dictionary<string, ManagedPool>();
 
         public event Action OnObjectCreated;
         public event Action OnObjectReturned;
 
         private void Awake()
         {
+            s_singleton.SetInstance(this);
+
             InitialiseAllPools();
         }
 
@@ -40,8 +36,6 @@ namespace Helper.ObjectPool
             // Attempt to initialise all the pools and add them to the dictionary if succeeded
             foreach (var poolData in m_poolData)
             {
-                if (!poolData.Initialise(this)) continue;
-
                 m_poolDict[poolData.Key] = poolData; 
             }
         }
@@ -53,39 +47,55 @@ namespace Helper.ObjectPool
         /// <param name="position">Position to set the acquired GameObject to</param>
         /// <param name="rotation">Rotation to set the acquired GameObject to</param>
         /// <returns></returns>
-        public GameObject GetFromPool([NotNull] GameObject prefab, Vector3 position, Quaternion rotation)
+        public GameObject Create(GameObject prefab, Vector3 position, Quaternion rotation)
         {
-            if (prefab == null) return null;
+            if (prefab.IsNull()) return null;
 
-            string _key = ManagedPool.GetKey(prefab);
+            string _key = PoolPrefab.GetKey(prefab);
 
-            return GetFromPool(_key, position, rotation);
+            return Create(_key, position, rotation);
         }
         
-        public GameObject GetFromPool(string key, Vector3 position, Quaternion rotation)
+        public GameObject Create(string key, Vector3 position, Quaternion rotation)
         {
-            if (!m_poolDict.ContainsKey(key)) return null;
+            if (m_poolDict.DoesNotContainKey(key)) return null;
 
             OnObjectCreated?.Invoke();
 
-            return m_poolDict[key].GetPrefab(position, rotation);
+            GameObject _obj = m_poolDict[key].Get(position, rotation);
+            UpdatePooledObjects(_obj, (IPooledObject _poolObj) => _poolObj.OnSpawned());
+
+            return _obj;
         }
 
         /// <summary>
         /// Return a GameObject to it's associated pool
         /// </summary>
         /// <param name="prefab">The prefab to return</param>
-        public void ReturnToPool([NotNull] GameObject prefab)
+        public void Dispose(GameObject prefab)
         {
-            if (prefab == null) return;
+            if (prefab.IsNull()) return;
 
-            string _key = ManagedPool.GetKey(prefab);
+            string _key = PoolPrefab.GetKey(prefab);
 
-            if (!m_poolDict.ContainsKey(_key)) return;
+            if (m_poolDict.DoesNotContainKey(_key)) return;
 
-            m_poolDict[_key].AddPrefab(prefab);
+            UpdatePooledObjects(prefab, (IPooledObject _poolObj) => _poolObj.OnDespawned());
+
+            m_poolDict[_key].Add(prefab);
 
             OnObjectReturned?.Invoke();
+        }
+
+        private void UpdatePooledObjects(GameObject obj, System.Action<IPooledObject> action)
+        {
+            if (obj.IsNull()) return;
+
+            IPooledObject[] _pooledObjects = obj.GetComponents<IPooledObject>();
+            foreach (var _poolObject in _pooledObjects)
+            {
+                action?.Invoke(_poolObject);
+            }
         }
     }
 }

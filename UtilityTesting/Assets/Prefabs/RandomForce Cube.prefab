@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4122483474175122937}
   - component: {fileID: 6580293752727332799}
   - component: {fileID: 9159901797159865935}
-  - component: {fileID: -4669519506528666517}
   - component: {fileID: -1932964548365858269}
   m_Layer: 0
   m_Name: RandomForce Cube
@@ -128,18 +127,6 @@ MonoBehaviour:
   m_lifeSpan: 10
   m_upForce: 25
   m_sideForce: 7
---- !u!114 &-4669519506528666517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1856034540532595154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66c7fb9e6004c9e46b5d36ec4c87576a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1932964548365858269
 MonoBehaviour:
   m_ObjectHideFlags: 0

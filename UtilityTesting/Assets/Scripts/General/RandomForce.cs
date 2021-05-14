@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Helper.ObjectPool;
+using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-public class RandomForce : PooledObject
+public class RandomForce : PoolBehaviour
 {
     public float m_lifeSpan = 5;
     public float m_upForce = 0;
@@ -27,7 +27,7 @@ public class RandomForce : PooledObject
     {
         if (Time.time > m_life)
         {
-            Despawn();
+            Dispose();
         }
     }
 

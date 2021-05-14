@@ -32,9 +32,27 @@ namespace Helper.Utility
         /// <param name="eulerRot"></param>
         public static void SetEulerRotation(this GameObject obj, Vector3 eulerRot) => obj.transform.eulerAngles = eulerRot;
 
+        public static void SetParent(this GameObject obj, Transform parent) => obj.transform.parent = parent;
+        public static Transform GetParent(this GameObject obj) => obj.transform.parent;
+
         public static bool InLayerMask(this GameObject obj, int mask) => obj.layer == (obj.layer | (1 << mask));
         public static bool InLayerMask(this GameObject obj, LayerMask mask) => InLayerMask(obj, mask.value);
 
         public static void ToggleActive(this GameObject obj) => obj.SetActive(!obj.activeInHierarchy);
+
+        /// <summary>
+        /// Get component from a GameObject, if there is none then one will be added
+        /// </summary>
+        /// <param name="obj">GameObject to extract component from</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T ExtractComponent<T>(this GameObject obj) where T : Component
+        {
+            if (obj.IsNull()) return null;
+
+            if (!obj.TryGetComponent<T>(out T _returnComp)) _returnComp = obj.AddComponent<T>();
+
+            return _returnComp;
+        }
     }
 }
