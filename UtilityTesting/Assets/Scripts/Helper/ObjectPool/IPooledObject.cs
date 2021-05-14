@@ -31,6 +31,11 @@ namespace Helper.ObjectPool
 
         [SerializeField, ReadOnly, HideLabel] private ManagedPool m_pool;
 
+        public string GetKey()
+        {
+            return m_pool.Key;
+        }
+
         private void UpdatePrefab(int index)
         {
             m_pool = ObjectPool.Instance.GetPool(m_prefabIndex);

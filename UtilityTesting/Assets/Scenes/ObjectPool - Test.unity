@@ -307,21 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnDelay: 0.1
-  m_poolPrefab:
-    m_prefab: {fileID: 1856034540532595154, guid: 9d4ef3d4a2fc8cf49bf04f521bc5a823,
-      type: 3}
-    m_key: e211ac04-8052-4c61-9aa3-3e9047548f13
-  m_fetcher:
-    m_prefabIndex: 0
-    m_pool:
-      m_poolPrefab:
-        m_prefab: {fileID: 1856034540532595154, guid: 9d4ef3d4a2fc8cf49bf04f521bc5a823,
-          type: 3}
-        m_key: e211ac04-8052-4c61-9aa3-3e9047548f13
-      m_startSize: 100
-      m_canResize: 0
-      m_resizePercent: 0
-  m_fetchers:
+  m_spawnPrefab:
     m_prefabIndex: 0
     m_pool:
       m_poolPrefab:

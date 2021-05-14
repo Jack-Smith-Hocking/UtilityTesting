@@ -10,14 +10,8 @@ public class BasicSpawner : MonoBehaviour
 
     [Space]
     
-    [BoxGroup("Pool")]
-    public PoolPrefab m_poolPrefab;
-
     [FoldoutGroup("Pool Fetcher")]
-    public PoolFetcher m_fetcher;
-
-    [FoldoutGroup("Pool Fetcher2")]
-    public PoolFetcher m_fetchers;
+    public PoolFetcher m_spawnPrefab;
 
     private float m_currentTime = 0;
     
@@ -28,7 +22,7 @@ public class BasicSpawner : MonoBehaviour
         {
             m_currentTime = Time.time + m_spawnDelay;
 
-            ObjectPool.Instance.Create(m_poolPrefab.Prefab, transform.position, transform.rotation);
+            ObjectPool.Instance.Create(m_spawnPrefab.GetKey(), transform.position, transform.rotation);
         }
     }
 }
