@@ -13,6 +13,12 @@ public class BasicSpawner : MonoBehaviour
     [BoxGroup("Pool")]
     public PoolPrefab m_poolPrefab;
 
+    [FoldoutGroup("Pool Fetcher")]
+    public PoolFetcher m_fetcher;
+
+    [FoldoutGroup("Pool Fetcher2")]
+    public PoolFetcher m_fetchers;
+
     private float m_currentTime = 0;
     
     // Update is called once per frame

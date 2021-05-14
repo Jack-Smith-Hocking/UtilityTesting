@@ -18,6 +18,8 @@ namespace Helper.ObjectPool
 
         private Dictionary<string, ManagedPool> m_poolDict = new Dictionary<string, ManagedPool>();
 
+        public int PoolCount => m_poolData.Count;
+
         public event Action OnObjectCreated;
         public event Action OnObjectReturned;
 
@@ -27,6 +29,8 @@ namespace Helper.ObjectPool
 
             InitialiseAllPools();
         }
+
+        public ManagedPool GetPool(int index) => m_poolData[index];
 
         /// <summary>
         /// Populate all of the pools that have valid prefabs

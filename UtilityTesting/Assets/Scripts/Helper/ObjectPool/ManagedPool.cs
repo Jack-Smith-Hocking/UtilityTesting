@@ -29,7 +29,7 @@ namespace Helper.ObjectPool
         }
     }
 
-    [System.Serializable]
+    [System.Serializable, InlineProperty]
     public class ManagedPool
     {
         #region Prefab Settings

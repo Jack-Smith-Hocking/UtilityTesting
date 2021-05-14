@@ -753,7 +753,7 @@ MonoBehaviour:
   m_nameFetcher:
     m_globalEventManager: {fileID: 0}
     m_useManagerInstance: 1
-    m_eventName: dh
+    m_eventName: dgg
   m_mappedKeys:
   - m_modifierKeyCode: 0
     m_primaryKeyCode: 9
