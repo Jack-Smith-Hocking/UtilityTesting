@@ -12,8 +12,8 @@ namespace Helper.Utility
         /// </summary>
         public static class Gen
         {
-            public static bool IsNUll(object obj) => obj == null || obj.Equals(null);
-            public static bool IsNotNull(object obj) => !IsNUll(obj);
+            public static bool IsNull(object obj) => obj == null || obj.Equals(null);
+            public static bool IsNotNull(object obj) => !IsNull(obj);
 
             public static bool IsEmpty<T>(T[] collection) => collection.Length == 0;
             public static bool IsEmpty<T>(List<T> collection) => collection.Count == 0;

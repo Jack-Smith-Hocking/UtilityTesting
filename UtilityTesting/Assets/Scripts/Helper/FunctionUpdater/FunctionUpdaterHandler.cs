@@ -4,19 +4,20 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Sirenix.OdinInspector;
+using Helper.Utility;
 
-namespace Helper.Utility
+namespace Helper.Updater
 {
     public class FunctionData
     {
-        public UpdateType UpdateLoopType { get; private set; } = UpdateType.NORMAL;
+        public UpdateCycle UpdateLoopType { get; private set; } = UpdateCycle.NORMAL;
         public string FunctionName { get; private set; } = "";
         public bool CancelUpdate { get; private set; } = false;
         public bool IsActive { get; private set; } = false;
 
         private Func<bool> m_updateFunction;
 
-        public FunctionData(Func<bool> updateFunction, string functionName, bool isActive, UpdateType updateType)
+        public FunctionData(Func<bool> updateFunction, string functionName, bool isActive, UpdateCycle updateType)
         {
             m_updateFunction = updateFunction;
             IsActive = isActive;
@@ -53,7 +54,7 @@ namespace Helper.Utility
     {
         private class FunctionUpdateHandler : MonoBehaviour
         {
-            private Dictionary<UpdateType, List<FunctionData>> m_updateDict = new Dictionary<UpdateType, List<FunctionData>>();
+            private Dictionary<UpdateCycle, List<FunctionData>> m_updateDict = new Dictionary<UpdateCycle, List<FunctionData>>();
 
             private List<FunctionData> m_cancelledData = new List<FunctionData>();
 
@@ -99,7 +100,7 @@ namespace Helper.Utility
                 FlushCancelled();
             }
 
-            private void UpdateData(UpdateType updateType)
+            private void UpdateData(UpdateCycle updateType)
             {
                 if (!m_updateDict.ContainsKey(updateType)) return;
                 m_cancelledData.Clear();
@@ -131,9 +132,9 @@ namespace Helper.Utility
 
             private void Awake() => this.hideFlags = HideFlags.HideInInspector;
 
-            private void FixedUpdate() => UpdateData(UpdateType.FIXED);
-            private void Update() => UpdateData(UpdateType.NORMAL);
-            private void LateUpdate() => UpdateData(UpdateType.LATE);
+            private void FixedUpdate() => UpdateData(UpdateCycle.FIXED);
+            private void Update() => UpdateData(UpdateCycle.NORMAL);
+            private void LateUpdate() => UpdateData(UpdateCycle.LATE);
         }
     }
 }

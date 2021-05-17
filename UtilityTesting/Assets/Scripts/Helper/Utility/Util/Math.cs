@@ -27,6 +27,9 @@ namespace Helper.Utility
             public static Vector3 Direction(Transform start, Transform end) => (end.position - start.position).normalized;
             public static Vector3 Direction(GameObject start, GameObject end) => (end.transform.position - start.transform.position).normalized;
 
+            public static bool Within(int value, int min, int max) => value >= min && value <= max;
+            public static bool Within(float value, float min, float max) => value >= min && value <= max;
+
             #region GetClosest
             public static bool GetClosestPoint(Vector3 point, List<Vector3> points, out Vector3 closest)
             {

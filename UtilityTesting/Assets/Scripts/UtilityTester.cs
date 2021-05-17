@@ -53,7 +53,7 @@ public class UtilityTester : MonoBehaviour
     private void Awake()
     {
         TestMonoInvoker();
-        KeyCodeEventMapper.Instance.AddMappedKey(KeyCode.None, KeyCode.Tab, () => { print("Pressed Tab"); });
+        KeyCodeEventMapper.Instance.AddMappedKey(KeyCode.None, KeyCode.Tab, KeyState.DOWN, () => { print("Pressed Tab"); });
         m_globalEventListener.ListenToEvent(() => { print("testing events"); });
     }
 

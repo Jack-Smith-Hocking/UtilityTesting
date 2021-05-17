@@ -756,21 +756,11 @@ MonoBehaviour:
     m_eventName: dgg
   m_mappedKeys:
   - m_modifierKeyCode: 0
-    m_primaryKeyCode: 9
-    m_event:
+    m_primaryKeyCode: 0
+    m_keyState: 0
+    OnActiveEvent:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1621349543}
-          m_MethodName: CallEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: yu
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     m_description: 
 --- !u!1 &1139902383
 GameObject:
@@ -2264,6 +2254,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3464470600224484040, guid: 6caff595a522f574083078ebd3d6fd7a,
+        type: 3}
+      propertyPath: m_cutTargetsFromView
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3464470600224484048, guid: 6caff595a522f574083078ebd3d6fd7a,
         type: 3}
       propertyPath: m_Name

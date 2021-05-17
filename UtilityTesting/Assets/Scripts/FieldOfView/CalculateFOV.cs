@@ -35,8 +35,6 @@ namespace Helper.FOV
 
         private Collider[] m_targetsInView;
 
-        private int m_testLoopInt = 0;
-
         private void Start()
         {
             StartCoroutine(nameof(FindTargetWithDelay), m_viewTargetInterval);

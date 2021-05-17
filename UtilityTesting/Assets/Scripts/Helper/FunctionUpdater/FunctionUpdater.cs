@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Helper.Utility;
 
-namespace Helper.Utility
+namespace Helper.Updater
 {
-    public enum UpdateType
+    public enum UpdateCycle
     {
         NORMAL,
         FIXED,
@@ -25,7 +26,7 @@ namespace Helper.Utility
         /// <param name="active">Whether the function starts active</param>
         /// <param name="updateType">Which update cycle should be used (Normal, Fixed or Late)</param>
         /// <returns></returns>
-        public static FunctionData CreateUpdater(Action updateFunc, string functionName = "", bool active = true, UpdateType updateType = UpdateType.NORMAL)
+        public static FunctionData CreateUpdater(Action updateFunc, string functionName = "", bool active = true, UpdateCycle updateType = UpdateCycle.NORMAL)
         {
             return CreateUpdater(() => { updateFunc.Invoke(); return true; }, functionName, active, updateType);
         }
@@ -38,7 +39,7 @@ namespace Helper.Utility
         /// <param name="active">Whether the function starts active</param>
         /// <param name="updateType">Which update cycle should be used (Normal, Fixed or Late)</param>
         /// <returns></returns>
-        public static FunctionData CreateUpdater(Func<bool> updateFunc, string functionName = "", bool active = true, UpdateType updateType = UpdateType.NORMAL)
+        public static FunctionData CreateUpdater(Func<bool> updateFunc, string functionName = "", bool active = true, UpdateCycle updateType = UpdateCycle.NORMAL)
         {
             FunctionData _updateData = new FunctionData(updateFunc, functionName, active, updateType);
 
