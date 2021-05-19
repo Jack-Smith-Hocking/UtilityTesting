@@ -10,20 +10,27 @@ namespace Helper.Updater
 {
     public class FunctionData
     {
-        public UpdateCycle UpdateLoopType { get; private set; } = UpdateCycle.NORMAL;
+        public UpdateCycle UpdateCycleType { get; private set; } = UpdateCycle.NORMAL;
+        
         public string FunctionName { get; private set; } = "";
+
+        public int SortOrder { get; private set; } = 0;
+
         public bool CancelUpdate { get; private set; } = false;
         public bool IsActive { get; private set; } = false;
 
         private Func<bool> m_updateFunction;
 
-        public FunctionData(Func<bool> updateFunction, string functionName, bool isActive, UpdateCycle updateType)
+        public FunctionData(Func<bool> updateFunction, string functionName, bool isActive, UpdateCycle updateType, int sortOrder = 0)
         {
             m_updateFunction = updateFunction;
+
             IsActive = isActive;
 
+            SortOrder = sortOrder;
+
             FunctionName = functionName;
-            UpdateLoopType = updateType;
+            UpdateCycleType = updateType;
         }
 
         public bool Update()
@@ -66,12 +73,13 @@ namespace Helper.Updater
             {
                 if (updateData.IsNull()) return;
 
-                if (m_updateDict.DoesNotContainKey(updateData.UpdateLoopType))
+                if (m_updateDict.DoesNotContainKey(updateData.UpdateCycleType))
                 {
-                    m_updateDict[updateData.UpdateLoopType] = new List<FunctionData>(5);
+                    m_updateDict[updateData.UpdateCycleType] = new List<FunctionData>(5);
                 }
 
-                m_updateDict[updateData.UpdateLoopType].Add(updateData);
+                m_updateDict[updateData.UpdateCycleType].Add(updateData);
+                SortExecutionOrder(updateData.UpdateCycleType);
             }
             /// <summary>
             /// Remove a FunctionData from the update loop of this handler
@@ -80,10 +88,10 @@ namespace Helper.Updater
             public void RemoveUpdateData(FunctionData updateData)
             {
                 if (updateData.IsNull()) return;
-                if (m_updateDict.DoesNotContainKey(updateData.UpdateLoopType)) return;
-                if (m_updateDict[updateData.UpdateLoopType].IsNull()) return;
+                if (m_updateDict.DoesNotContainKey(updateData.UpdateCycleType)) return;
+                if (m_updateDict[updateData.UpdateCycleType].IsNull()) return;
 
-                m_updateDict[updateData.UpdateLoopType].Remove(updateData);
+                m_updateDict[updateData.UpdateCycleType].Remove(updateData);
             }
 
             /// <summary>
@@ -124,10 +132,17 @@ namespace Helper.Updater
 
                 foreach (FunctionData _cancelledData in m_cancelledData)
                 {
-                    m_updateDict[_cancelledData.UpdateLoopType].Remove(_cancelledData);
+                    m_updateDict[_cancelledData.UpdateCycleType].Remove(_cancelledData);
                 }
 
                 m_cancelledData.Clear();
+            }
+
+            private void SortExecutionOrder(UpdateCycle sortCycle)
+            {
+                if (m_updateDict.DoesNotContainKey(sortCycle)) return;
+
+                m_updateDict[sortCycle].Sort((a, b) => a.SortOrder.CompareTo(b.SortOrder));
             }
 
             private void Awake() => this.hideFlags = HideFlags.HideInInspector;

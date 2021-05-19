@@ -74,7 +74,7 @@ namespace Helper.Utility
     public class KeyCodeEventMapper : SerializedMonoBehaviour
     {
         public static KeyCodeEventMapper Instance => s_singleton.Instance;
-        private static Singleton<KeyCodeEventMapper> s_singleton = new Singleton<KeyCodeEventMapper>(nameof(KeyCodeEventMapper));
+        private static MonoSingleton<KeyCodeEventMapper> s_singleton = new MonoSingleton<KeyCodeEventMapper>(nameof(KeyCodeEventMapper));
 
         [FoldoutGroup("GlobalEventFetcher")]
         [Tooltip("Fetches the name of global events")]

@@ -106,6 +106,5 @@ namespace Helper.Grid
                 m_textGrid[x, y].text = _obj?.ToString();
             };
         }
-
     }
 }

@@ -16,7 +16,7 @@ namespace Helper.Updater
     public static partial class FunctionUpdater
     {
         private static FunctionUpdateHandler HandlerInstance => s_singleton.Instance;
-        private static Singleton<FunctionUpdateHandler> s_singleton = new Singleton<FunctionUpdateHandler>(nameof(FunctionUpdateHandler));
+        private static MonoSingleton<FunctionUpdateHandler> s_singleton = new MonoSingleton<FunctionUpdateHandler>(nameof(FunctionUpdateHandler));
 
         /// <summary>
         /// Add an Action to the static update queue
@@ -26,9 +26,9 @@ namespace Helper.Updater
         /// <param name="active">Whether the function starts active</param>
         /// <param name="updateType">Which update cycle should be used (Normal, Fixed or Late)</param>
         /// <returns></returns>
-        public static FunctionData CreateUpdater(Action updateFunc, string functionName = "", bool active = true, UpdateCycle updateType = UpdateCycle.NORMAL)
+        public static FunctionData CreateUpdater(Action updateFunc, string functionName = "", bool active = true, UpdateCycle updateType = UpdateCycle.NORMAL, int order = 0)
         {
-            return CreateUpdater(() => { updateFunc.Invoke(); return true; }, functionName, active, updateType);
+            return CreateUpdater(() => { updateFunc.Invoke(); return true; }, functionName, active, updateType, order);
         }
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace Helper.Updater
         /// <param name="active">Whether the function starts active</param>
         /// <param name="updateType">Which update cycle should be used (Normal, Fixed or Late)</param>
         /// <returns></returns>
-        public static FunctionData CreateUpdater(Func<bool> updateFunc, string functionName = "", bool active = true, UpdateCycle updateType = UpdateCycle.NORMAL)
+        public static FunctionData CreateUpdater(Func<bool> updateFunc, string functionName = "", bool active = true, UpdateCycle updateType = UpdateCycle.NORMAL, int order = 0)
         {
-            FunctionData _updateData = new FunctionData(updateFunc, functionName, active, updateType);
+            FunctionData _updateData = new FunctionData(updateFunc, functionName, active, updateType, order);
 
             HandlerInstance.AddFunctionData(_updateData);
 

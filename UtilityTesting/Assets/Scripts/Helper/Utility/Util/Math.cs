@@ -23,9 +23,18 @@ namespace Helper.Utility
             public static bool InLayerMask(int layer, int mask) => layer == (layer | (1 << mask));
             public static bool InLayerMask(int layer, LayerMask mask) => InLayerMask(layer, mask.value);
 
-            public static Vector3 Direction(Vector3 start, Vector3 end) => (end - start).normalized;
-            public static Vector3 Direction(Transform start, Transform end) => (end.position - start.position).normalized;
-            public static Vector3 Direction(GameObject start, GameObject end) => (end.transform.position - start.transform.position).normalized;
+            /// <summary>
+            /// Returns direction from start to end
+            /// </summary>
+            public static Vector3 Direction(Vector3 start, Vector3 end, bool norm = true) => norm ? (end - start).normalized : (end - start);
+            /// <summary>
+            /// Returns direction from start to end
+            /// </summary>
+            public static Vector3 Direction(Transform start, Transform end, bool norm = true) => Direction(start.position, end.position, norm);
+            /// <summary>
+            /// Returns direction from start to end
+            /// </summary>
+            public static Vector3 Direction(GameObject start, GameObject end, bool norm = true) => Direction(start.transform.position, end.transform.position, norm);
 
             public static bool Within(int value, int min, int max) => value >= min && value <= max;
             public static bool Within(float value, float min, float max) => value >= min && value <= max;

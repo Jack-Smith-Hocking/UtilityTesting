@@ -28,7 +28,7 @@ namespace Helper.Utility
     public class GlobalEventManager : SerializedMonoBehaviour
     {
         public static GlobalEventManager Instance => s_singleton.Instance;
-        private static Singleton<GlobalEventManager> s_singleton = new Singleton<GlobalEventManager>(nameof(GlobalEventManager));
+        private static MonoSingleton<GlobalEventManager> s_singleton = new MonoSingleton<GlobalEventManager>(nameof(GlobalEventManager));
 
         [Tooltip("Dictionary of global events")]
         [SerializeField] private Dictionary<string, GlobalEventData> m_globalEvents = new Dictionary<string, GlobalEventData>();

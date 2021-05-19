@@ -5,6 +5,18 @@ using UnityEngine;
 
 namespace Helper.Utility
 {
+    public struct ValuePair<T>
+    {
+        public readonly T value;
+        public readonly bool hasValue;
+
+        public ValuePair(T value, bool hasValue)
+        {
+            this.value = value;
+            this.hasValue = hasValue;
+        }
+    }
+
     public static partial class Util
     {
         /// <summary>

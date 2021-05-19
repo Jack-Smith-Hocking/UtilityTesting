@@ -14,7 +14,7 @@ namespace Helper.ObjectPool
         [SerializeField] private List<ManagedPool> m_poolData;
 
         public static ObjectPool Instance => s_singleton.Instance;
-        private static Singleton<ObjectPool> s_singleton = new Singleton<ObjectPool>(nameof(ObjectPool), true);
+        private static MonoSingleton<ObjectPool> s_singleton = new MonoSingleton<ObjectPool>(nameof(ObjectPool), true);
 
         private Dictionary<string, ManagedPool> m_poolDict = new Dictionary<string, ManagedPool>();
 

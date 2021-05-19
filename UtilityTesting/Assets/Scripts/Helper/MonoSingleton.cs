@@ -5,7 +5,27 @@ using UnityEngine;
 
 namespace Helper.Utility
 {
-    public class Singleton<T> where T : MonoBehaviour
+    public class Singleton<T> where T : new()
+    {
+        public T Instance => GetInstance();
+        private T m_instance;
+
+        public Singleton() { }
+        public Singleton(T instance)
+        {
+            if (m_instance.IsNull()) Debug.LogWarning($"Trying to initialise a Singleton<{typeof(T)}> with a null instance");
+            m_instance = instance;
+        }
+
+        public T GetInstance()
+        {
+            if (m_instance.IsNull()) m_instance = new T();
+
+            return m_instance;
+        }
+    }
+
+    public class MonoSingleton<T> where T : MonoBehaviour
     {
         public T Instance => GetInstance();
 
@@ -14,7 +34,7 @@ namespace Helper.Utility
         private string m_className;
         private bool m_enforceSingleton;
 
-        public Singleton(string className, bool enforceSingleton = false)
+        public MonoSingleton(string className, bool enforceSingleton = false)
         {
             m_className = className;
             m_enforceSingleton = enforceSingleton;
