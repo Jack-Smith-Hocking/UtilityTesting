@@ -7,9 +7,12 @@ namespace Helper.Utility
     public class MonoInvoker 
     {
         private static MonoInvoker m_instance = null;
+
         private MonoBehaviour m_mono;
 
         public MonoInvoker(MonoBehaviour mb) => m_mono = mb;
+
+        public void SetMono(MonoBehaviour mono) => m_mono = mono;
 
         public static MonoInvoker GetStaticInstance(MonoBehaviour mb)
         {

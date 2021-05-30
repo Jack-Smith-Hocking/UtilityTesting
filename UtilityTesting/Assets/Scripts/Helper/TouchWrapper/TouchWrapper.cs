@@ -47,26 +47,26 @@ namespace Helper.Utility
 
         public bool IsMobile => Application.isMobilePlatform;
 
-        public Vector2 PreviousMainPosition { get; private set; } = Vector2.zero;
-        public Vector2 CurrentMainPosition { get; private set; } = Vector2.zero;
-        public Vector2 MovementMainDirection { get; private set; } = Vector2.zero;
+        public Vector2 PreviousPosition { get; private set; } = Vector2.zero;
+        public Vector2 CurrentPosition { get; private set; } = Vector2.zero;
+        public Vector2 MovementDirection { get; private set; } = Vector2.zero;
 
         public TouchWrapper()
         {
             FunctionUpdater.CreateUpdater(() =>
             {
                 Update();
-            }, "TouchInputWrapper_U", true, UpdateCycle.NORMAL, int.MinValue);
+            }, "TouchWrapper_U", true, UpdateCycle.NORMAL, int.MinValue);
             FunctionUpdater.CreateUpdater(() =>
             {
                 LateUpdate();
-            }, "TouchInputWrapper_LU", true, UpdateCycle.LATE, int.MaxValue);
+            }, "TouchWrapper_LU", true, UpdateCycle.LATE, int.MinValue);
 
-            if (!IsMobile) return;
+            if (IsMobile == false) return;
 
             OnTouchBegan += (Touch touch) => 
             {
-                if (TouchCount == 0)
+                if (PrevTouchCount == 0)
                 {
                     SetMainTouch(touch);
                     OnFirstGroupTouch?.Invoke(touch);
@@ -188,11 +188,11 @@ namespace Helper.Utility
 
         private void UpdateMovementDirection()
         {
-            PreviousMainPosition = CurrentMainPosition;
+            PreviousPosition = CurrentPosition;
             bool _validPos = GetMainInputPosition(out Vector2 _currentPos);
-            CurrentMainPosition = _validPos ? _currentPos : CurrentMainPosition;
+            CurrentPosition = _validPos ? _currentPos : CurrentPosition;
 
-            MovementMainDirection = Util.Math.Direction(PreviousMainPosition, CurrentMainPosition);
+            MovementDirection = Util.Math.Direction(PreviousPosition, CurrentPosition);
         }
 
         private void PC_Update()

@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 
 namespace Helper.ObjectPool
 {
+    [DisallowMultipleComponent]
     public class ObjectPool : MonoBehaviour
     {
         [Tooltip("List of pools and associated data")]

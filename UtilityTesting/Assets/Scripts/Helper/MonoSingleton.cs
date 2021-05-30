@@ -13,7 +13,7 @@ namespace Helper.Utility
         public Singleton() { }
         public Singleton(T instance)
         {
-            if (m_instance.IsNull()) Debug.LogWarning($"Trying to initialise a Singleton<{typeof(T)}> with a null instance");
+            if (instance.IsNull()) Debug.LogWarning($"Trying to initialise a Singleton<{typeof(T)}> with a null instance");
             m_instance = instance;
         }
 
