@@ -51,19 +51,14 @@ namespace Helper.Utility
                 if (predicate.IsNull()) { Debug.LogWarning($"SafeWhile loop exited due to a null predicate", logContext); return; }
                 if (action.IsNull()) { Debug.LogWarning($"SafeWhile loop exited due to a null action", logContext); return; }
 
-                int _iterationCount = 0;
-
-                while (predicate.Invoke() == true)
+                SafeWhile(() =>
                 {
-                    action.Invoke();
+                    bool _valid = predicate.Invoke();
 
-                    _iterationCount++;
+                    if (_valid) action?.Invoke();
 
-                    if (_iterationCount < maxIterations) continue;
-                    if (logWarning) Debug.LogWarning($"SafeWhile loop broken out of, exceeded max iterations ({maxIterations})", logContext);
-
-                    break;
-                }
+                    return _valid;
+                }, maxIterations, logWarning, logContext);
             }
             public static void SafeWhile(System.Func<bool> loopContent, int maxIterations = 1000, bool logWarning = true, UnityEngine.Object logContext = null)
             {

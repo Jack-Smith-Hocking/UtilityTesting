@@ -44,7 +44,7 @@ public class TypeCacheBehaviour : SerializedMonoBehaviour
     {
         for (int _index = 0; _index < m_iterationCount; _index++)
         {
-            m_currentType = m_useRandType ? Util.Rand.Element(m_validTypes) : m_validTypes[0];
+            m_currentType = m_useRandType ? m_validTypes.Rand() : m_validTypes[0];
             if (m_useCache)
             {
                 if (m_cacheCache)

@@ -76,10 +76,10 @@ namespace Helper.Utility
         /// <returns></returns>
         public List<Component> GetAllComponents<TComp>() where TComp : Component { return GetAllComponents(typeof(TComp)); }
 
-        private void SetCache(System.Type cacheType)
+        private void SetCache(System.Type cachedType)
         {
-            m_cachedList = m_cachedDict[cacheType];
-            m_cachedType = cacheType;
+            m_cachedList = m_cachedDict[cachedType];
+            m_cachedType = cachedType;
         }
 
         private bool IsCached(System.Type checkType) => checkType == m_cachedType;

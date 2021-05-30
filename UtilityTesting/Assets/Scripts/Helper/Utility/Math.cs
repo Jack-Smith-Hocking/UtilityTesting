@@ -36,7 +36,21 @@ namespace Helper.Utility
             /// </summary>
             public static Vector3 Direction(GameObject start, GameObject end, bool norm = true) => Direction(start.transform.position, end.transform.position, norm);
 
+            /// <summary>
+            /// Return true if value is >= min and <= max
+            /// </summary>
+            /// <param name="value"></param>
+            /// <param name="min"></param>
+            /// <param name="max"></param>
+            /// <returns></returns>
             public static bool Within(int value, int min, int max) => value >= min && value <= max;
+            /// <summary>
+            /// Return true if value is >= min and <= max
+            /// </summary>
+            /// <param name="value"></param>
+            /// <param name="min"></param>
+            /// <param name="max"></param>
+            /// <returns></returns>
             public static bool Within(float value, float min, float max) => value >= min && value <= max;
 
             #region GetClosest
@@ -111,11 +125,25 @@ namespace Helper.Utility
         public static bool InLayerMask(this int layer, int mask) => layer == (layer | (1 << mask));
         public static bool InLayerMask(this int layer, LayerMask mask) => InLayerMask(layer, mask.value);
 
-        public static Vector3 DirectionTo(this Vector3 start, Vector3 end) => (end - start).normalized;
-        public static Vector3 DirectionTo(this Transform start, Transform end) => (end.position - start.position).normalized;
-        public static Vector3 DirectionTo(this GameObject start, GameObject end) => (end.transform.position - start.transform.position).normalized;
+        public static Vector3 DirectionTo(this Vector3 start, Vector3 end, bool norm = true) => norm ? (end - start).normalized : (end - start);
+        public static Vector3 DirectionTo(this Transform start, Transform end, bool norm = true) => DirectionTo(start.position, end.position, norm);
+        public static Vector3 DirectionTo(this GameObject start, GameObject end, bool norm = true) => DirectionTo(start.transform.position, end.transform.position, norm);
 
+        /// <summary>
+        /// Return true if value is >= min and <= max
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         public static bool In(this int value, int min, int max) => value >= min && value <= max;
+        /// <summary>
+        /// Return true if value is >= min and <= max
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         public static bool In(this float value, float min, float max) => value >= min && value <= max;
 
         #region Distance Squared
