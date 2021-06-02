@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Helper.Utility;
+using Jack.Utility;
 
-namespace Helper.Rewind
+namespace Jack.Rewind
 {
     public class RewindManager : MonoBehaviour
     {

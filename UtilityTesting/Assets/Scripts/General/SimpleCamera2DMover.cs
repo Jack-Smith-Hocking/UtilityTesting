@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Helper.Utility;
-using Helper.Updater;
+using Jack.Utility;
+using Jack.Updater;
 
 public class SimpleCamera2DMover : MonoBehaviour
 {

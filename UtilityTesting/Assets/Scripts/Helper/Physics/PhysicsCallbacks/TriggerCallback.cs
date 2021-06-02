@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GDML.Physics
+namespace Jack.Utility.Physics
 {
     public class TriggerCallback : PhysicsCallback<Collider>
     {

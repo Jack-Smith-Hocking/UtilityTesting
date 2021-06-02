@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     public static partial class Util
     {

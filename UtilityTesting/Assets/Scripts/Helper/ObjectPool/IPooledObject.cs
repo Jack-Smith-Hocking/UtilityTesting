@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Helper.ObjectPool
+namespace Jack.ObjectPool
 {
     public interface IPooledObject
     {

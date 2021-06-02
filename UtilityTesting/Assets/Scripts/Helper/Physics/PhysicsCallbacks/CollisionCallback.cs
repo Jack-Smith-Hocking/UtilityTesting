@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GDML.Physics
+namespace Jack.Utility.Physics
 {
     /// <summary>
     /// Since Triggers and Collisions have no callback functionality (to my knowledge) i made a simple class to do just that

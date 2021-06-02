@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     public static partial class Util
     {

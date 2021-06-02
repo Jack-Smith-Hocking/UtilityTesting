@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Helper.ObjectPool;
+using Jack.ObjectPool;
 
 public class BasicSpawner : MonoBehaviour
 {

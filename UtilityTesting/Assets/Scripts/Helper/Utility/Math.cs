@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     public static partial class Util
     {
@@ -54,6 +54,10 @@ namespace Helper.Utility
             public static bool Within(float value, float min, float max) => value >= min && value <= max;
 
             #region GetClosest
+            public static Vector3 GetClosest(Vector3 anchor, Vector3 pointOne, Vector3 pointTwo) => DistanceSqrd(pointOne, anchor) < DistanceSqrd(pointTwo, anchor) ? pointOne : pointTwo;
+            public static Transform GetClosest(Transform anchor, Transform pointOne, Transform pointTwo) => DistanceSqrd(pointOne, anchor) < DistanceSqrd(pointTwo, anchor) ? pointOne : pointTwo;
+            public static GameObject GetClosest(GameObject anchor, GameObject pointOne, GameObject pointTwo) => DistanceSqrd(pointOne, anchor) < DistanceSqrd(pointTwo, anchor) ? pointOne : pointTwo;
+
             public static bool GetClosestPoint(Vector3 point, List<Vector3> points, out Vector3 closest)
             {
                 if (points.IsEmpty()) { closest = Vector3.zero; return false; }
@@ -81,7 +85,9 @@ namespace Helper.Utility
 
                 return true;
             }
-            public static bool GetClosestPoint(Collider point, List<Collider> points, out Collider closest)
+            public static bool GetClosestPoint(Collider point, List<Collider> points, out Collider closest) => GetClosestPoint(point.gameObject, points, out closest);
+
+            public static bool GetClosestPoint(GameObject point, List<Collider> points, out Collider closest)
             {
                 if (points.Count == 0) { closest = null; return false; }
 

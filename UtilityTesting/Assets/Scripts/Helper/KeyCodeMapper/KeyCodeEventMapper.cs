@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
-using Helper.Updater;
+using Jack.Updater;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     public enum KeyState
     { 

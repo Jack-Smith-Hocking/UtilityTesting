@@ -4,9 +4,9 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Sirenix.OdinInspector;
-using Helper.Utility;
+using Jack.Utility;
 
-namespace Helper.Updater
+namespace Jack.Updater
 {
     public class FunctionData
     {

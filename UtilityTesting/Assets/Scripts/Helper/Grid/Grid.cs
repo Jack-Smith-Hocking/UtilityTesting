@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Helper.Utility;
+using Jack.Utility;
 using UnityEngine;
 
-namespace Helper.Grid
+namespace Jack.Grid
 {
     public class Grid<TGridObject>
     {

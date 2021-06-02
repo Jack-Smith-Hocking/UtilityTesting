@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     public class Singleton<T> where T : new()
     {

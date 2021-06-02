@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Jack.Utility;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GDML.Physics
+namespace Jack.Utility.Physics
 {
     [RequireComponent(typeof(Joint))]
-    public class JointCallback : Callback<float>
+    public class JointCallback : MonoBehaviour
     {
         [SerializeField]
         [Tooltip("Callback for when this joint breaks")] private UnityEvent m_onBreakEvent = null;
@@ -16,24 +17,10 @@ namespace GDML.Physics
         [SerializeField]
         [Tooltip("The Joint that is being managed, if no Joint is input will get the first found on on this gameObject")] private Joint m_managedJoint = null;
 
-        public static string CallbackType_JointBreak => "JOINT_BREAK";
+        public event System.Action<float> OnJointBreakEvent;
 
-        protected override void Awake()
-        {
-            base.Awake();
+        protected void Awake() => ValidateJoint();
 
-            ValidateJoint();
-        }
-
-        protected override void InitialiseCallbackDictionary(ref Dictionary<string, Action<float>> initDictionary)
-        {
-            if (initDictionary == null) throw new ArgumentNullException(nameof(initDictionary));
-            
-            initDictionary = new Dictionary<string, Action<float>>()
-            {
-                { CallbackType_JointBreak, (float data) => { } },
-            };
-        }
 
         /// <summary>
         /// Add a RigidBody to connect the Joint to
@@ -77,7 +64,7 @@ namespace GDML.Physics
         private void OnJointBreak(float breakForce)
         {
             m_onBreakEvent.Invoke();
-            base.InvokeCallback(CallbackType_JointBreak, breakForce);
+            OnJointBreakEvent?.Invoke(breakForce);
         }
     }
 }

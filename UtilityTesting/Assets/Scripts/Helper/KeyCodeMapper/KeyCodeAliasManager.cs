@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     [CreateAssetMenu(menuName = "ScriptableObject/KeyCodeAliasSettings", fileName = "New KeyCodeAliasSettings")]
     public class KeyCodeAliasManager : SerializedScriptableObject

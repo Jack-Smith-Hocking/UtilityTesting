@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
-using Helper.Utility;
+using Jack.Utility;
 
-namespace Helper.ObjectPool
+namespace Jack.ObjectPool
 {
     [System.Serializable, InlineProperty, HideLabel]
     public struct PoolPrefab

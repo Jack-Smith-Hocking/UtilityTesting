@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Helper.Utility;
+using Jack.Utility;
 
 public class TypeCacheBehaviour : SerializedMonoBehaviour
 {

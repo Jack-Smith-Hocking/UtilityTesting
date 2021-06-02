@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Helper.Utility;
-using Helper.Updater;
+using Jack.Utility;
+using Jack.Updater;
 using Sirenix.OdinInspector;
 
-namespace Helper.Grid
+namespace Jack.Grid
 {
     public class GridVisualiser : MonoBehaviour
     {

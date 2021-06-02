@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
-using Helper.Utility;
+using Jack.Utility;
 using Sirenix.OdinInspector;
 
-namespace Helper.ObjectPool
+namespace Jack.ObjectPool
 {
     [DisallowMultipleComponent]
     public class ObjectPool : MonoBehaviour

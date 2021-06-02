@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using Helper.Utility;
+using Jack.Utility;
 
 public class SimpleWander : MonoBehaviour
 {

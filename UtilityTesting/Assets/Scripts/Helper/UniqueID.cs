@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     public class UniqueID : MonoBehaviour
     {

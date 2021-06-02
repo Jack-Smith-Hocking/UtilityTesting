@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Helper.Updater;
+using Jack.Updater;
 using UnityEngine;
 using System.Linq;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     public class TouchWrapper
     {

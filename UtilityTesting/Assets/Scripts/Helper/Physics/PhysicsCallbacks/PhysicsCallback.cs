@@ -4,10 +4,10 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-namespace GDML.Physics
+namespace Jack.Utility.Physics
 {
     [RequireComponent(typeof(Collider))]
-    public abstract class PhysicsCallback<T> : Callback<T>
+    public abstract class PhysicsCallback<T> : MonoBehaviour
     {
         [SerializeField, TabGroup("Enter")]
         [Tooltip("Callback for when this object enters a trigger/collision")] private UnityEvent m_onEnterEvent = null;
@@ -18,36 +18,25 @@ namespace GDML.Physics
         [SerializeField, TabGroup("Exit")]
         [Tooltip("Callback for when this object exits a trigger/collision")] private UnityEvent m_onExitEvent = null;
 
-        public static string CallbackType_Enter => "ENTER";
-        public static string CallbackType_Stay => "STAY";
-        public static string CallbackType_Exit => "EXIT";
+        public event System.Action<T> OnEnterEvent;
+        public event System.Action<T> OnStayEvent;
+        public event System.Action<T> OnExitEvent;
 
-        protected override void InitialiseCallbackDictionary(ref Dictionary<string, Action<T>> initDictionary)
-        {
-            if (initDictionary == null) throw new ArgumentNullException(nameof(initDictionary));
-
-            initDictionary = new Dictionary<string, Action<T>>()
-            {
-                { CallbackType_Enter, (T data) => { } },
-                { CallbackType_Exit, (T data) => { } },
-                { CallbackType_Stay, (T data) => { } }
-            };
-        }
 
         protected virtual void OnEnter(T info)
         {
             m_onEnterEvent?.Invoke();
-            base.InvokeCallback(CallbackType_Enter, info);
+            OnEnterEvent?.Invoke(info);
         }
         protected virtual void OnStay(T info)
         {
             m_onStayEvent?.Invoke();
-            base.InvokeCallback(CallbackType_Stay, info);
+            OnStayEvent?.Invoke(info);
         }
         protected virtual void OnExit(T info)
         {
             m_onExitEvent?.Invoke();
-            base.InvokeCallback(CallbackType_Exit, info);
+            OnExitEvent?.Invoke(info);
         }
     }
 }

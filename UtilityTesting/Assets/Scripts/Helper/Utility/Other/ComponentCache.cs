@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Helper.Utility;
+using Jack.Utility;
 using UnityEngine;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     [DisallowMultipleComponent]
     public class ComponentCache

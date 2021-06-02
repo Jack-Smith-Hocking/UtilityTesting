@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Helper.Utility;
+using Jack.Utility;
 
-namespace Helper.Updater
+namespace Jack.Updater
 {
     public enum UpdateCycle
     {

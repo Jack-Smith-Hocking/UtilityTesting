@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Helper.Utility;
+using Jack.Utility;
 using Sirenix.OdinInspector;
 using System;
 
-namespace Helper.FOV
+namespace Jack.FOV
 {
     public class CalculateFOV : MonoBehaviour
     {

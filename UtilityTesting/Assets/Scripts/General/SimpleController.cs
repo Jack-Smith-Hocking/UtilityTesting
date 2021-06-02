@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Helper.Updater;
-using Helper.Utility;
+using Jack.Updater;
+using Jack.Utility;
 
 public class SimpleController : MonoBehaviour
 {

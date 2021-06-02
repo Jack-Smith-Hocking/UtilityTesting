@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Helper.Utility
+namespace Jack.Utility
 {
     [InlineProperty, System.Serializable, HideLabel]
     public class GlobalEventNameFetcher
