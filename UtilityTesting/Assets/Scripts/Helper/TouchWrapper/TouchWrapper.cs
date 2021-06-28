@@ -125,7 +125,7 @@ namespace Jack.Utility
         /// </summary>
         /// <param name="touchID">The amount of touches on the screen</param>
         /// <returns></returns>
-        public bool ValidTouchPresent(int touchID = 0) => Util.Math.Within(touchID, 1, PrevTouchCount - 1);
+        public bool ValidTouchPresent(int touchID = 0) => Util.Math.InRange(touchID, 1, PrevTouchCount - 1);
 
         /// <summary>
         /// Get the position of a touch on the screen

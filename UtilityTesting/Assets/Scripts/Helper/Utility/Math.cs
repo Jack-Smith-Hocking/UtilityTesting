@@ -20,9 +20,30 @@ namespace Jack.Utility
             /// <returns>A rotated vector</returns>
             public static Vector3 RotateBy(float angle, Vector3 axis, Vector3 dir) => Quaternion.AngleAxis(angle, axis.normalized) * dir.normalized;
 
+            public static float DotToRad(float dotProduct) => Mathf.Acos(dotProduct);
+            public static float DotToDegree(float dotProduct) => Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
+
             public static bool InLayerMask(int layer, int mask) => layer == (layer | (1 << mask));
             public static bool InLayerMask(int layer, LayerMask mask) => InLayerMask(layer, mask.value);
 
+            /// <summary>
+            /// Return true if value is >= min and <= max
+            /// </summary>
+            /// <param name="value"></param>
+            /// <param name="min"></param>
+            /// <param name="max"></param>
+            /// <returns></returns>
+            public static bool InRange(int value, int min, int max) => value >= min && value <= max;
+            /// <summary>
+            /// Return true if value is >= min and <= max
+            /// </summary>
+            /// <param name="value"></param>
+            /// <param name="min"></param>
+            /// <param name="max"></param>
+            /// <returns></returns>
+            public static bool InRange(float value, float min, float max) => value >= min && value <= max;
+
+            #region DirectionTo
             /// <summary>
             /// Returns direction from start to end
             /// </summary>
@@ -35,23 +56,7 @@ namespace Jack.Utility
             /// Returns direction from start to end
             /// </summary>
             public static Vector3 Direction(GameObject start, GameObject end, bool norm = true) => Direction(start.transform.position, end.transform.position, norm);
-
-            /// <summary>
-            /// Return true if value is >= min and <= max
-            /// </summary>
-            /// <param name="value"></param>
-            /// <param name="min"></param>
-            /// <param name="max"></param>
-            /// <returns></returns>
-            public static bool Within(int value, int min, int max) => value >= min && value <= max;
-            /// <summary>
-            /// Return true if value is >= min and <= max
-            /// </summary>
-            /// <param name="value"></param>
-            /// <param name="min"></param>
-            /// <param name="max"></param>
-            /// <returns></returns>
-            public static bool Within(float value, float min, float max) => value >= min && value <= max;
+            #endregion
 
             #region GetClosest
             public static Vector3 GetClosest(Vector3 anchor, Vector3 pointOne, Vector3 pointTwo) => DistanceSqrd(pointOne, anchor) < DistanceSqrd(pointTwo, anchor) ? pointOne : pointTwo;
@@ -131,26 +136,36 @@ namespace Jack.Utility
         public static bool InLayerMask(this int layer, int mask) => layer == (layer | (1 << mask));
         public static bool InLayerMask(this int layer, LayerMask mask) => InLayerMask(layer, mask.value);
 
+        /// <summary>
+        /// Return true if value is >= min and <= max
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min">[inclusive]</param>
+        /// <param name="max">[inclusive]</param>
+        /// <returns></returns>
+        public static bool InRange(this int value, int min, int max) => value >= min && value <= max;
+        /// <summary>
+        /// Return true if value is >= min and <= max
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="min">[inclusive]</param>
+        /// <param name="max">[inclusive]</param>
+        /// <returns></returns>
+        public static bool InRange(this float value, float min, float max) => value >= min && value <= max;
+
+        /// <summary>
+        /// Calculate a point on a ray, origin + (direction * dist)
+        /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="dist">Distance along the ray</param>
+        /// <returns>A point in the direction of the ray, 'dist' units from the origin</returns>
+        public static Vector3 Point(this Ray ray, float dist) => ray.origin + (ray.direction.normalized * dist);
+
+        #region DirectionTo
         public static Vector3 DirectionTo(this Vector3 start, Vector3 end, bool norm = true) => norm ? (end - start).normalized : (end - start);
         public static Vector3 DirectionTo(this Transform start, Transform end, bool norm = true) => DirectionTo(start.position, end.position, norm);
         public static Vector3 DirectionTo(this GameObject start, GameObject end, bool norm = true) => DirectionTo(start.transform.position, end.transform.position, norm);
-
-        /// <summary>
-        /// Return true if value is >= min and <= max
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public static bool In(this int value, int min, int max) => value >= min && value <= max;
-        /// <summary>
-        /// Return true if value is >= min and <= max
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public static bool In(this float value, float min, float max) => value >= min && value <= max;
+        #endregion
 
         #region Distance Squared
         public static float DistanceSqrd(this Vector2 a, Vector2 b) => (a - b).sqrMagnitude;

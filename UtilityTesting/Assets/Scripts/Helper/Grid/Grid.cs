@@ -98,6 +98,6 @@ namespace Jack.Grid
             });
         }
 
-        private bool IsValidInput(int x, int y) => x.In(0, Width - 1) && y.In(0, Height - 1);
+        private bool IsValidInput(int x, int y) => x.InRange(0, Width - 1) && y.InRange(0, Height - 1);
     }
 }
