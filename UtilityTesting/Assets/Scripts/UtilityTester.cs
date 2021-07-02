@@ -36,11 +36,6 @@ public class UtilityTester : MonoBehaviour
         {
             _points.Add(Util.Rand.Vector());
         }
-
-        for (int _index = 0; _index < m_iterationCount; _index++)
-        {
-            Util.Math.GetClosestPoint(_point, _points, out Vector3 _closestPoint);
-        }
     }
 
     private void TestMonoInvoker()
