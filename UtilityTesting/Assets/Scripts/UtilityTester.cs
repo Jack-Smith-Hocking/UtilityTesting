@@ -6,55 +6,45 @@ using Sirenix.OdinInspector;
 
 public class UtilityTester : MonoBehaviour
 {
-    [FoldoutGroup("GlobalEvent 1")]
-    public GlobalEventListener m_globalEventListener = new GlobalEventListener();
+    public int m_iterationCount;
+    public bool m_useCustom;
 
-    [Space]
-
-    public int m_iterationCount = 0;
-
-    [Space]
-
-    [TabGroup("GetClosest")]
-    public int m_getClosestListSize = 0;
-    [TabGroup("GetClosest")]
-    public bool m_testGetClosest = false;
-
-    [TabGroup("MonoInvoker")]
-    public GameObject m_monoInvokerToggleObject;
-    [TabGroup("MonoInvoker")]
-    public bool m_testMonoInvoker = false;
-
-    public void TestGetClosest()
+    [Button("TestLogging")]
+    public void TestLogging(int count, bool useCustom)
     {
-        if (!m_testGetClosest) return;
-
-        List<Vector3> _points = new List<Vector3>(m_getClosestListSize);
-        Vector3 _point = transform.position;
-
-        for (int _listSizeIndex = 0; _listSizeIndex < m_getClosestListSize; _listSizeIndex++)
+        for (int i = 0; i < count; i++)
         {
-            _points.Add(RandUtil.Vector());
+            if (useCustom)
+            {
+                DebugLogger.Log($"TestLog: {i}", 0, this);
+            }
+            else
+            {
+                Debug.Log($"TestLog: {i}", this);
+            }
         }
     }
 
-    private void TestMonoInvoker()
+    public void Update()
     {
-        if (!m_testMonoInvoker) return;
-
-        this.Invoker().FrameRepeat(() => { m_monoInvokerToggleObject.ToggleActive(); }, 1f);
+        TestLogging(m_iterationCount, m_useCustom);    
     }
 
-    private void Awake()
+    [Button("Log")]
+    void TestLog(int priority)
     {
-        TestMonoInvoker();
-        KeyCodeEventMapper.Instance.AddMappedKey(KeyCode.None, KeyCode.Tab, KeyState.DOWN, () => { print("Pressed Tab"); });
-        m_globalEventListener.ListenToEvent(() => { print("testing events"); });
+        DebugLogger.Log("Test log!!", priority);
     }
 
-    // Update is called once per frame
-    void Update()
+    [Button("LogWarning")]
+    void TestLogWarning(int priority)
     {
-        TestGetClosest();
+        DebugLogger.LogWarning("Test log warning!!", priority);
+    }
+
+    [Button("LogError")]
+    void TestLogError(int priority)
+    {
+        DebugLogger.LogError("Test log error!!", priority);
     }
 }
