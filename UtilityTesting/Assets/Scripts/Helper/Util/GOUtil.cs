@@ -11,7 +11,7 @@ namespace Jack.Utility
         /// <summary>
         /// Utility class for GameObjects & Transforms
         /// </summary>
-        public static class GO
+        public static class GOUtil
         {
             /// <summary>
             /// Get component from a GameObject, if there is none then one will be added
@@ -36,8 +36,6 @@ namespace Jack.Utility
             /// <returns></returns>
             public static Transform GetChild(Transform root, string childName)
             {
-                root.ThrowExceptionIfNull();
-
                 for (int _childIndex = 0; _childIndex < root.childCount; _childIndex++)
                 {
                     Transform _parent = root.GetChild(_childIndex);
@@ -53,7 +51,7 @@ namespace Jack.Utility
         }
     }
 
-    public static partial class ExtGO
+    public static partial class GO_Ext
     {
         /// <summary>
         /// Get the world position

@@ -94,7 +94,7 @@ namespace Jack.Utility
             foreach (Component _comp in _components)
             {
                 System.Type _compType = _comp.GetType();
-                Util.Gen.ValidateCollectionValue(_compType, m_cachedDict);
+                GenUtil.ValidateCollectionValue(_compType, m_cachedDict);
 
                 m_cachedDict[_compType].Add(_comp);
             }

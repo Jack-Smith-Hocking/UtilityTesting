@@ -21,7 +21,7 @@ public class SimpleWander : MonoBehaviour
         Vector3 _pos = transform.position;
         _pos.y = m_target.y;
 
-        if (Util.Math.InDistance(_pos, m_target, m_navAgent.stoppingDistance) || m_navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        if (DistUtil.InDistance(_pos, m_target, m_navAgent.stoppingDistance) || m_navAgent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
             UpdatePosition();
         }
@@ -29,7 +29,7 @@ public class SimpleWander : MonoBehaviour
 
     private void UpdatePosition()
     {
-        m_target = Util.Rand.NavMeshPosition(transform.position, m_maxWander, 1000);
+        m_target = RandUtil.NavMeshPosition(transform.position, m_maxWander, 1000);
 
         m_navAgent.SetDestination(m_target);
     }

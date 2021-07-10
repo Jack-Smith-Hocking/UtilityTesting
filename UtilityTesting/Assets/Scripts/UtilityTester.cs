@@ -34,7 +34,7 @@ public class UtilityTester : MonoBehaviour
 
         for (int _listSizeIndex = 0; _listSizeIndex < m_getClosestListSize; _listSizeIndex++)
         {
-            _points.Add(Util.Rand.Vector());
+            _points.Add(RandUtil.Vector());
         }
     }
 

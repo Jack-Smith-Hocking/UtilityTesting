@@ -5,23 +5,22 @@ using UnityEngine;
 
 namespace Jack.Utility
 {
-    public partial class Util
+    public static class StrUtil
     {
-        public static class Str
-        {
-            public static string ExcludeMultiple(string text, params string[] wordsToExlude)
-            {
-                foreach (var _word in wordsToExlude)
-                {
-                    text = text.Exclude(_word);
-                }
+        public static string SetColour(string text, Color colour) => text.SetColour(colour);
 
-                return text;
+        public static string ExcludeMultiple(string text, params string[] wordsToExlude)
+        {
+            foreach (var _word in wordsToExlude)
+            {
+                text = text.Exclude(_word);
             }
+
+            return text;
         }
     }
 
-    public static class ExtStr
+    public static class Str_Ext
     {
         public static string Exclude(this string text, string wordToExclude) => text.Replace(wordToExclude, "");
         public static string Exclude(string text, params string[] wordsToExlude)
